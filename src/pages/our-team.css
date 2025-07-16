@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+}
+
+.our-team-page {
+  background-color: rgb(1, 1, 18);
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.our-team-team-page {
+  padding-top: 2rem;
+}
+
+.our-team-about-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px;
+  max-width: 1200px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.our-team-about-image img {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+.our-team-about-image {
+  box-shadow:
+    0 0 5px #b0bcec,
+    0 0 10px #7277c8,
+    0 0 15px #5649cb;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.our-team-about-content {
+  margin-left: 40px;
+  max-width: 600px;
+}
+
+.our-team-about-content h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 5px rgb(43, 43, 219);
+}
+
+.our-team-about-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.our-team-about-content .highlight {
+  color: rgb(46, 111, 241);
+}
+
+.our-team-about-content p {
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.our-team-glow{
+  background-color: blue;
+  width: 7rem;
+  height: 2rem;
+  border: none;
+  border-radius: 10px;
+}
+.our-team-glow a{
+  color: white;
+  font-size: 1.2rem;
+  text-decoration: none;
+}

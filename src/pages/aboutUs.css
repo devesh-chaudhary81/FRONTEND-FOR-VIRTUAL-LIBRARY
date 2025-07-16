@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+
+.about-us {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Ensure everything centers */
+  background-color: black;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.about-us-video {
+  position: fixed; /* use fixed for full-screen sticking */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+}
+
+.about-us-main-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.about-us-main-heading h1 {
+  color: blue;
+  font-size: 3rem;
+}
+
+.about-us-sub-heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.about-us-sub-heading p {
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.about-us-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 7rem;
+  width: 60%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px rgb(255, 255, 255);
+  padding: 1rem;
+  z-index: 1;
+}
+
+.about-us-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: black;
+  height: 17rem;
+  width: 15rem;
+  margin: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 15px rgb(0, 0, 0);
+}
+
+.about-us-box h2 {
+  margin-top: 1rem;
+  font-size: 2rem;
+  text-align: center;
+  height: auto;
+  color: blue;
+}
+
+.about-us-box a {
+  text-decoration: none;
+}
+
+.about-us-description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.2rem;
+  padding: 0 0.5rem;
+}
+
+.about-us-description p {
+  text-align: center;
+  font-size: 1.2rem;
+  color: white;
+}
