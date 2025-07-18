@@ -1,11 +1,9 @@
 import React from 'react';
-import './our-team.css';
-
 import deveshImg from '../assets/devesh.jpg';
-// import divyanshImg from '../assets/divyansh.jpg';
-// import deekshaImg from '../assets/deeksha.jpg';
-// import bhuvneshImg from '../assets/bhuvnesh.jpg';
 import devanshImg from '../assets/devansh.jpg';
+import divyanshImg from '../assets/divyansh.jpg'
+import bhuvnesh from '../assets/bhuvnesh.jpg';
+import deekshaImg from '../assets/deeksha.jpg';
 
 const teamMembers = [
   {
@@ -17,19 +15,19 @@ const teamMembers = [
   {
     name: 'Divyansh Yadav',
     role: 'Frontend Developer',
-    // image: divyanshImg,
+    image:divyanshImg,
     linkedin: 'https://www.linkedin.com/in/devesh-chaudhary-987325312',
   },
   {
     name: 'Deeksha Gupta',
     role: 'Frontend Developer',
-    // image: deekshaImg,
+    image: deekshaImg,
     linkedin: 'https://www.linkedin.com/in/deeksha-gupta-7824682b3/',
   },
   {
     name: 'Bhuvnesh Vashishth',
     role: 'Backend Developer',
-    // image: bhuvneshImg,
+    image:bhuvnesh,
     linkedin: 'https://www.linkedin.com/in/devesh-chaudhary-987325312',
   },
   {
@@ -42,30 +40,40 @@ const teamMembers = [
 
 const OurTeam = () => {
   return (
-    <div className="our-team-page">
+    <div className="bg-[rgb(1,1,18)] text-white font-[Poppins]">
       {teamMembers.map((member, index) => (
-        <section className="our-team-about-section" key={index}>
-          <div className="our-team-about-image">
-            <img src={member.image} alt={`${member.name} photo`} />
-          </div>
-          <div className="our-team-about-content">
-            <h1>{member.name}</h1>
-            <h2>
-              <span className="our-team-highlight">{member.role}</span> & Problem Solver
+        <section
+          key={index}
+          className="flex flex-wrap justify-center items-center gap-8 px-4 py-12 max-w-6xl mx-auto"
+        >
+          {member.image && (
+            <div className="rounded-xl overflow-hidden shadow-lg shadow-black/60 border border-[#7277c8]">
+              <img
+                src={member.image}
+                alt={`${member.name} photo`}
+                className="w-[300px] h-auto rounded-md shadow-xl"
+              />
+            </div>
+          )}
+          <div className="max-w-xl text-left space-y-4 px-4">
+            <h1 className="text-4xl font-bold text-white drop-shadow-md">{member.name}</h1>
+            <h2 className="text-xl font-semibold">
+              <span className="text-blue-400">{member.role}</span> & Problem Solver
             </h2>
-            <p>
-              I am a backend web developer. I can provide clean, efficient, and scalable server-side code to ensure your application runs smoothly and securely. I also make the backend more powerful & responsive with database management, API development, and performance optimization.
+            <p className="text-base leading-relaxed text-gray-300">
+              I am a backend web developer. I can provide clean, efficient, and scalable server-side
+              code to ensure your application runs smoothly and securely. I also make the backend
+              more powerful & responsive with database management, API development, and performance
+              optimization.
             </p>
-            <button className="our-team-glow">
-              <a
-                href={member.linkedin}
-                className="our-team-links"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Linkedin
-              </a>
-            </button>
+            <a
+              href={member.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-lg font-medium px-6 py-2 rounded-md transition"
+            >
+              LinkedIn
+            </a>
           </div>
         </section>
       ))}
@@ -74,3 +82,4 @@ const OurTeam = () => {
 };
 
 export default OurTeam;
+
