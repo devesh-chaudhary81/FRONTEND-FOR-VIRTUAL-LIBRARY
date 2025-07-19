@@ -22,6 +22,10 @@ import LanguagesCulture from './pages/language-culture';
 import MythologyHistory from './pages/mythology-history';
 import SelfHelpLifestyle from './pages/selfHelp-lifestyle';
 import SpiritualityReligion from './pages/spirituality-religion';
+import UserDashboard from './pages/Me';
+import SearchResults from './pages/searchResult';
+import ForgotPassword from './pages/forget-pass';
+import ReadBook from './pages/readBook';
 // import Login from "./pages/login";
 
 function App() {
@@ -52,6 +56,10 @@ function App() {
    <Route path="/mythology-history" element={<MythologyHistory />} />
   <Route path="/selfHelp-lifestyle" element={<SelfHelpLifestyle />} />
   <Route path="/spirituality-religion" element={<SpiritualityReligion />} />
+  <Route path="/me" element={<UserDashboard />} />
+  <Route path="/search" element={<SearchResults />} />
+  <Route path="/forgot password" element={<ForgotPassword />} />
+  <Route path="/read/:id" element={<ReadBook />} />
 </Routes>
     </BrowserRouter>
   );

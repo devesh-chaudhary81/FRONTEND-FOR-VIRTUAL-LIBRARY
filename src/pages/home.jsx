@@ -3,11 +3,20 @@ import { Link } from "react-router-dom";
 import logo from "../assets/logo3.jpg";
 import backgroundImage from "../assets/background2.png";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
-const [user, setUser] = useState(null);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
+
+  const [user, setUser] = useState(null);
 
   // ✅ Load user from localStorage when component mounts
   useEffect(() => {
@@ -76,19 +85,19 @@ const [user, setUser] = useState(null);
               >
                 Categories
               </Link>
-              {user? (
-          <Link to="/me">
-            <button className="bg-blue-900 text-white px-5 py-1 rounded-lg text-sm hover:bg-white hover:text-blue-900 transition">
-              Me
-            </button>
-          </Link>
-        ) : (
-          <Link to="/login">
-            <button className="bg-blue-900 text-white px-5 py-1 rounded-lg text-sm hover:bg-white hover:text-blue-900 transition">
-              Login
-            </button>
-          </Link>
-        )}
+              {user ? (
+                <Link to="/me">
+                  <button className="bg-blue-900 text-white px-5 py-1 rounded-lg text-sm hover:bg-white hover:text-blue-900 transition">
+                    Me
+                  </button>
+                </Link>
+              ) : (
+                <Link to="/login">
+                  <button className="bg-blue-900 text-white px-5 py-1 rounded-lg text-sm hover:bg-white hover:text-blue-900 transition">
+                    Login
+                  </button>
+                </Link>
+              )}
             </nav>
           </div>
         </header>
@@ -103,17 +112,24 @@ const [user, setUser] = useState(null);
             great read is just a search away.
           </p>
 
-          <form className="mt-8">
+          <form
+            onSubmit={handleSearch}
+            className="mt-8 flex flex-col items-center gap-4"
+          >
             <input
               type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for books, authors, or genres"
               className="px-6 py-3 w-4/5 max-w-xl text-lg text-black rounded-full text-center bg-white/90 placeholder-black focus:outline-none"
             />
+            <button
+              type="submit"
+              className="px-8 py-3 bg-[#4A69E2] text-white font-bold rounded-full hover:bg-[#3B5BDB] transition transform hover:-translate-y-1"
+            >
+              Search Now
+            </button>
           </form>
-
-          <button className="mt-8 px-8 py-3 bg-[#4A69E2] text-white font-bold rounded-full hover:bg-[#3B5BDB] transition transform hover:-translate-y-1">
-            Search Now
-          </button>
         </section>
 
         {/* Featured Section */}
