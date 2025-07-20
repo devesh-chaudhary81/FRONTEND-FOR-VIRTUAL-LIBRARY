@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import {toast} from 'react-toastify'
 const SearchResults = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,7 +32,7 @@ const SearchResults = () => {
     const userId = user?._id;
 
     if (!userId) {
-      alert("User not logged in.");
+      toast.error("User not logged in.");
       return;
     }
 
@@ -41,10 +41,10 @@ const SearchResults = () => {
         userId,
         bookId,
       });
-      alert("✅ Book added to MyShelf");
+      toast.success("✅ Book added to MyShelf");
     } catch (err) {
       console.error(err);
-      alert("❌ Failed to add to MyShelf");
+      toast.error("❌ Failed to add to MyShelf");
     }
   };
 
@@ -62,10 +62,10 @@ const SearchResults = () => {
         userId,
         bookId,
       });
-      alert("✅ Book added to Favourites");
+      toast.success("✅ Book added to Favourites");
     } catch (err) {
       console.error(err);
-      alert("❌ Failed to add to Favourites");
+      toast.error("❌ Failed to add to Favourites");
     }
   };
 

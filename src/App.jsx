@@ -26,11 +26,23 @@ import UserDashboard from './pages/userDashboard';
 import SearchResults from './pages/searchResult';
 import ForgotPassword from './pages/forget-pass';
 import ReadBook from './pages/readBook';
-// import Login from "./pages/login";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <BrowserRouter>
+    <ToastContainer
+        position="bottom-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"  // options: light | dark | colored
+      />
       <Routes>
   <Route path="/" element={<Home />} />
   <Route path="/home" element={<Home />} />
