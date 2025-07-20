@@ -9,7 +9,7 @@ import fashion from "../assets/fasion.png";
 import interior from "../assets/interior.avif";
 import hacks from "../assets/hacks.jpeg";
 import journal from "../assets/journal.webp";
-
+import { useNavigate } from "react-router-dom";
 const hobbyCategories = [
   { title: "Cooking & Recipes", image: cooking },
   { title: "Gardening", image: gardening },
@@ -22,6 +22,11 @@ const hobbyCategories = [
 ];
 
 const HobbiesLifestyle = () => {
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-pink-50 to-green-50 px-4 py-10 font-['Poppins']">
       <div className="text-center mb-10">
@@ -34,6 +39,7 @@ const HobbiesLifestyle = () => {
         {hobbyCategories.map((item, index) => (
           <div
             key={index}
+             onClick={() => handleCardClick(item.title)}
             className="bg-white border border-gray-200 shadow-md rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 hover:bg-pink-50"
           >
             <div className="h-40">

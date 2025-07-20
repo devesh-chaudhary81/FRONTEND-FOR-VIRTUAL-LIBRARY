@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 // ✅ Import all category images
 import gita from "../assets/bhagwat_geeta.png";
 import ramayana from "../assets/ramayana.jpg";
@@ -22,6 +22,11 @@ const categories = [
 ];
 
 const SpiritualityReligion = () => {
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-white px-4 py-10 font-['Poppins']">
       <div className="text-center mb-10">
@@ -34,6 +39,7 @@ const SpiritualityReligion = () => {
         {categories.map((item, index) => (
           <div
             key={index}
+            onClick={() => handleCardClick(item.title)}
             className="bg-white border border-gray-200 shadow-md rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 hover:bg-amber-50"
           >
             <div className="h-40">

@@ -5,8 +5,14 @@ import business from '../assets/bussiness.png';
 import invest from '../assets/invest.jpeg';
 import sales from '../assets/sales.jpeg';
 import leader from '../assets/leader.jpg';
-
+import { useNavigate } from "react-router-dom";
 const CareerProfessional = () => {
+
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   const cards = [
     { image: resume, title: 'Resume & Interview Prep' },
     { image: hustle, title: 'Freelancing & Side Hustles' },
@@ -28,6 +34,7 @@ const CareerProfessional = () => {
         {cards.map((card, index) => (
           <div
             key={index}
+             onClick={() => handleCardClick(card.title)}
             className="w-60 bg-white text-black rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500  animate-fadeUp"
             style={{ animationDelay: `${index * 0.2}s`, animationFillMode: 'forwards' }}
           >

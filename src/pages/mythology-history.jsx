@@ -8,7 +8,7 @@ import ancient from "../assets/ancient.jpeg";
 import freedom from "../assets/freedom.webp";
 import war from "../assets/war.jpg";
 import cultural from "../assets/cultural.jpg";
-
+import { useNavigate } from "react-router-dom";
 const categories = [
   { title: "Indian Mythology", image: mythology },
   { title: "Greek & Roman Mythology", image: greek },
@@ -20,6 +20,11 @@ const categories = [
 ];
 
 const MythologyHistory = () => {
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-900 via-stone-900 to-black px-4 py-8 font-['Poppins'] text-white">
       <div className="text-center mb-10">
@@ -32,6 +37,7 @@ const MythologyHistory = () => {
         {categories.map((item, index) => (
           <div
             key={index}
+            onClick={() => handleCardClick(item.title)}
             className="bg-white bg-opacity-10 hover:bg-opacity-20 backdrop-blur-md rounded-xl overflow-hidden shadow-md transform hover:scale-105 transition-all duration-300"
           >
             <div className="h-40 overflow-hidden">

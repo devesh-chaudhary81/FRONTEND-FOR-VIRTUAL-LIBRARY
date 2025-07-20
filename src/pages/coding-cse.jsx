@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 // Import all images from assets
 import webDev from "../assets/webdev.png";
@@ -23,7 +24,15 @@ const categories = [
   { title: "System Design", image: system },
 ];
 
+
+
 const CodingComputerScience = () => {
+const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-slate-950 to-black px-4 py-8 font-['Poppins'] text-white">
       <div className="text-center mb-10">
@@ -35,9 +44,10 @@ const CodingComputerScience = () => {
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
         {categories.map((item, index) => (
           <div
-            key={index}
-            className="bg-white bg-opacity-10 hover:bg-opacity-20 backdrop-blur-md rounded-xl overflow-hidden shadow-md transform hover:scale-105 transition-all duration-300"
-          >
+  key={index}
+  onClick={() => handleCardClick(item.title)}
+  className="cursor-pointer bg-white bg-opacity-10 hover:bg-opacity-20 backdrop-blur-md rounded-xl overflow-hidden shadow-md transform hover:scale-105 transition-all duration-300"
+>
             <div className="h-40 overflow-hidden">
               <img
                 src={item.image}

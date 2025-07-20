@@ -8,7 +8,7 @@ import drawing from "../assets/drawing.jpeg";
 import poems from "../assets/poems.jpeg";
 import bedtime from "../assets/bedtime.png";
 import puzzle from "../assets/puzzle.jpg";
-
+import { useNavigate } from "react-router-dom";
 const kidsCategories = [
   { title: "Moral Stories", image: moral },
   { title: "Fairy Tales", image: fairy },
@@ -20,6 +20,11 @@ const kidsCategories = [
 ];
 
 const ForKids = () => {
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 via-purple-100 to-yellow-100 px-4 py-10 font-['Poppins']">
       <div className="text-center mb-10">
@@ -32,6 +37,7 @@ const ForKids = () => {
         {kidsCategories.map((item, index) => (
           <div
             key={index}
+             onClick={() => handleCardClick(item.title)}
             className="bg-white hover:bg-yellow-50 border border-pink-200 shadow-md rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300"
           >
             <div className="h-40">

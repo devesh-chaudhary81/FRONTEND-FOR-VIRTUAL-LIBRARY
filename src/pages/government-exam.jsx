@@ -8,8 +8,13 @@ import jee from '../assets/jee.webp';
 import cuet from '../assets/cuet.png';
 import tet from '../assets/tet.jpeg';
 import ugc from '../assets/ugc.jpeg';
-
+import { useNavigate } from "react-router-dom";
 const GovernmentExamPrep = () => {
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   const cards = [
     { image: upsc, title: 'UPSC' },
     { image: ssc, title: 'SSC' },
@@ -34,6 +39,7 @@ const GovernmentExamPrep = () => {
         {cards.map((card, index) => (
           <div
             key={index}
+             onClick={() => handleCardClick(card.title)}
             className="w-60 bg-white text-black rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500  animate-fadeUp"
             style={{ animationDelay: `${index * 0.15}s`, animationFillMode: 'forwards' }}
           >

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { useNavigate } from "react-router-dom";
 // Import your images
 import news from "../assets/news.jpeg";
 import internationalnews from "../assets/internationalnews.jpg";
@@ -22,6 +22,12 @@ const newsCategories = [
 ];
 
 const CurrentAffairs = () => {
+
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-100 px-4 py-10 font-['Poppins']">
       <div className="text-center mb-10">
@@ -31,20 +37,21 @@ const CurrentAffairs = () => {
       </div>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-        {newsCategories.map((item, index) => (
+        {newsCategories.map((card, index) => (
           <div
             key={index}
+             onClick={() => handleCardClick(card.title)}
             className="bg-white border border-gray-200 shadow-md rounded-xl overflow-hidden transform hover:scale-105 transition-all duration-300 hover:bg-blue-50"
           >
             <div className="h-40">
               <img
-                src={item.image}
-                alt={item.title}
+                src={card.image}
+                alt={card.title}
                 className="w-full h-full object-cover"
               />
             </div>
             <div className="p-4 text-center">
-              <p className="text-lg font-semibold text-gray-700">{item.title}</p>
+              <p className="text-lg font-semibold text-gray-700">{card.title}</p>
             </div>
           </div>
         ))}

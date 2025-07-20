@@ -2,8 +2,14 @@ import React from 'react';
 import comic from '../assets/comic.jpg';
 import photography from '../assets/photography.jpeg';
 import meme from '../assets/meme1.jpg';
-
+import { useNavigate } from "react-router-dom";
 const CreativeEntertainment = () => {
+
+  const navigate = useNavigate();
+  const handleCardClick = (subcategory) => {
+  // Navigate to SearchResult page with query
+  navigate(`/search?q=${encodeURIComponent(subcategory)}`);
+};
   const cards = [
     { image: comic, title: 'Comics & Graphic Novels' },
     { image: photography, title: 'Photography' },
@@ -22,6 +28,7 @@ const CreativeEntertainment = () => {
         {cards.map((card, index) => (
           <div
             key={index}
+             onClick={() => handleCardClick(card.title)}
             className="w-60 bg-white text-black rounded-2xl overflow-hidden shadow-lg transform transition-all duration-500  animate-fadeUp"
             style={{ animationDelay: `${index * 0.2}s`, animationFillMode: 'forwards' }}
           >
