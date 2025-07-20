@@ -121,7 +121,7 @@ const UserDashboard = () => {
               <div key={fb._id} className="p-3 bg-white rounded-lg shadow-sm border mb-2">
                 <p className="font-semibold text-gray-800">{fb.fullName}</p>
                 <p className="text-gray-600">{fb.message}</p>
-                <small className="text-gray-400">{new Date(fb.createdAt).toLocaleString()}</small>
+                <small className="text-gray-500">{new Date(fb.createdAt).toLocaleString()}</small>
               </div>
             )) : <p className="text-gray-500 italic">No feedbacks found.</p>}
           </motion.div>
