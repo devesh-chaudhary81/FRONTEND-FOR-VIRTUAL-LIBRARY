@@ -61,12 +61,12 @@ const Home = () => {
               >
                 Home
               </Link>
-              <Link
+              {/* <Link
                 to="#"
                 className="text-white text-lg w-24 text-center rounded-md hover:underline hover:decoration-yellow-400 font-medium"
               >
                 My Shelf
-              </Link>
+              </Link> */}
               <Link
                 to="/about-us"
                 className="text-white text-lg w-24 text-center rounded-md hover:underline hover:decoration-yellow-400 font-medium"
@@ -86,7 +86,7 @@ const Home = () => {
                 Categories
               </Link>
               {user ? (
-                <Link to="/me">
+                <Link to="/userDashboard">
                   <button className="bg-blue-900 text-white px-5 py-1 rounded-lg text-sm hover:bg-white hover:text-blue-900 transition">
                     Me
                   </button>

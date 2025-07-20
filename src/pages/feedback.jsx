@@ -23,13 +23,21 @@ const FeedbackForm = () => {
     e.preventDefault();
     setError(null);
 
+    const user = JSON.parse(localStorage.getItem("user")); // get logged-in user
+  const userId = user?._id;
+
+  if (!userId) {
+    setError("User not logged in");
+    return;
+  }
+
     try {
       const response = await fetch("https://api-routes.onrender.com/api/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({...formData, userId})
       });
 
       if (!response.ok) throw new Error("Failed to submit feedback");
