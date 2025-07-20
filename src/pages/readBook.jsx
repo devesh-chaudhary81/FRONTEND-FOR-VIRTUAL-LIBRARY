@@ -26,8 +26,8 @@ useEffect(() => {
   if (!book) return <p className="text-center mt-10">🔄 Loading book...</p>;
 
   return (
-    <div className="p-4 bg-gray-100 min-h-screen">
-      <h2 className="text-2xl font-bold mb-4 text-center">{book.title}</h2>
+    <div className="p-4 bg-black min-h-screen">
+      <h2 className="text-2xl font-bold mb-4 text-white text-center">{book.title}</h2>
       <div className="flex justify-center">
         <iframe
   src={`https://docs.google.com/gview?url=${book.contentURL}&embedded=true`}
