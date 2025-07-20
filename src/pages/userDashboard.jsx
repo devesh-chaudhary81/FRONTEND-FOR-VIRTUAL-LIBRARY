@@ -135,9 +135,8 @@ const UserDashboard = () => {
     <div className="flex h-screen overflow-hidden">
       <aside className="w-64 bg-indigo-700 text-white p-6 space-y-4">
         <h2 className="text-2xl font-bold mb-6">📚 Dashboard</h2>
-        {/* <p className="text-sm mb-3">👋 {storedUser?.name} (@{storedUser?.username})</p>
-        <p className="text-sm mb-6">⏱️ {readingHours} hrs read</p>
-        <button onClick={() => { setActiveTab('stats'); fetchStats(); }} className={activeTab === 'stats' ? activeStyle : baseStyle}>📈 Stats</button> */}
+         <p className="text-sm mb-3">👋 Welcome {storedUser?.name}</p>
+       
         <button onClick={() => { setActiveTab('favourites'); fetchFavourites(); }} className={activeTab === 'favourites' ? activeStyle : baseStyle}>💚 Favourites</button>
         <button onClick={() => { setActiveTab('myshelf'); fetchMyShelf(); }} className={activeTab === 'myshelf' ? activeStyle : baseStyle}>📚 MyShelf</button>
         <button onClick={() => { setActiveTab('feedbacks'); fetchFeedbacks(); }} className={activeTab === 'feedbacks' ? activeStyle : baseStyle}>📝 Feedbacks</button>
