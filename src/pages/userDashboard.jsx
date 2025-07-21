@@ -89,7 +89,7 @@ const UserDashboard = () => {
       case 'favourites':
         return (
           <motion.div key="favourites" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h3 className="text-xl font-bold mb-4 text-blue-950 l drop-shadow-[0_0_4px_#00ffff]">☆ Favourite Books</h3>
+            <h3 className="text-xl font-bold mb-4 text-blue-950 l drop-shadow-[0_0_4px_#00ffff]"> Favourite Books</h3>
             <ul className="list-disc pl-5 space-y-1 drop-shadow-[0_0_4px_#00ffff]">
               {favourites.map(book => (
                 <li key={book._id}><a href={`/read/${book._id}`} className="text-blue-400 hover:underline drop-shadow-[0_0_4px_#00ffff]">{book.title}</a></li>
@@ -100,7 +100,7 @@ const UserDashboard = () => {
       case 'myshelf':
         return (
           <motion.div key="myshelf" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h3 className="text-xl font-bold text-blue-950 mb-4 drop-shadow-[0_0_4px_#00ffff]">𝄜  MyShelf</h3>
+            <h3 className="text-xl font-bold text-blue-950 mb-4 drop-shadow-[0_0_4px_#00ffff]">  MyShelf</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
               {shelf.map(({ bookId }) => (
                 <div key={bookId._id} className="bg-white p-4 shadow rounded-xl border border-gray-200">
@@ -171,7 +171,7 @@ const UserDashboard = () => {
           onClick={handleLogout}
           className="text-red-300 hover:text-red-500 font-semibold mt-4 drop-shadow-[0_0_4px_#ff0000] transition"
         >
-          🔓 Logout
+          ⏻ Logout
         </button>
       </aside>
 
