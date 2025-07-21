@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import bgImg from '../assets/background.jpg';
 import { Link, useNavigate } from 'react-router-dom';
+import {toast} from 'react-toastify'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,12 +35,12 @@ const Login = () => {
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
-      // alert(response.data.message || 'Login successful');
+      toast.success(response.data.message || 'Login successful');
       navigate('/home');
-      window.location.reload();
+      
     } catch (error) {
       console.error('Login error:', error.response?.data || error.message);
-      alert(error.response?.data?.message || 'Login failed');
+      toast.error(error.response?.data?.message || 'Login failed');
     }
   };
 

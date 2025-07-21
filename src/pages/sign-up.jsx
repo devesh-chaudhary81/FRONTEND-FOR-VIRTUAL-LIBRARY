@@ -21,7 +21,7 @@ const Signup = () => {
   e.preventDefault();
 
   if (formData.password !== formData.confirmPassword) {
-    alert("Passwords don't match!");
+    toast.warn("Passwords don't match!");
     return;
   }
 
@@ -37,12 +37,12 @@ const Signup = () => {
     );
 
     if (response.status === 200) {
-      alert("Signup successful!");
+      toast.success("Signup successful!");
       navigate("/login");
     }
   } catch (error) {
     console.error("Signup failed →", error.response?.data || error.message);
-    alert(
+    toast.error(
       error.response?.data?.message || "Signup failed. Please try again later."
     );
   }
