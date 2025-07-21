@@ -101,10 +101,10 @@ const UserDashboard = () => {
         return (
           <motion.div key="myshelf" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <h3 className="text-xl font-bold text-blue-950 mb-4 drop-shadow-[0_0_4px_#00ffff]">  MyShelf</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 ">
+            <div className="flex flex-wrap gap-16 ">
               {shelf.map(({ bookId }) => (
-                <div key={bookId._id} className="bg-white p-4 shadow rounded-xl border border-gray-200">
-                  <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-cover rounded-lg mb-2" />
+                <div key={bookId._id} className="bg-white p-4 shadow w-[300px] rounded-xl border border-gray-200">
+                  <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-contain rounded-lg mb-2" />
                   <h4 className="font-bold text-lg drop-shadow-[0_0_4px_#00ffff]">{bookId.title}</h4>
                   <p className="text-sm text-gray-500 drop-shadow-[0_0_4px_#00ffff]">{bookId.author}</p>
                   <a href={`/read/${bookId._id}`} className="text-blue-400 hover:underline text-sm mt-1 inline-block drop-shadow-[0_0_4px_#00ffff]">▶️ Read Book</a>
