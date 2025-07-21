@@ -43,7 +43,7 @@ function App() {
         draggable
         pauseOnHover
          HEAD
-        theme="dark"  // options: light | dark | colored
+        theme="dark"
 
        
       />
