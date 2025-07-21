@@ -11,7 +11,7 @@ const ForgotPassword = () => {
 
   const sendOTP = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/otp/send-otp', { email });
+      const res = await axios.post('https://api-routes.onrender.com/api/otp/send-otp', { email });
       alert(res.data.message);
       setOtpSent(true);
     } catch (err) {
@@ -21,7 +21,7 @@ const ForgotPassword = () => {
 
   const verifyOTP = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/otp/verify-otp', { email, otp });
+      const res = await axios.post('https://api-routes.onrender.com/api/otp/verify-otp', { email, otp });
       alert(res.data.message);
       setOtpVerified(true);
     } catch (err) {
@@ -35,7 +35,7 @@ const ForgotPassword = () => {
       return;
     }
     try {
-      const res = await axios.post('http://localhost:3000/api/otp/reset-password', {
+      const res = await axios.post('https://api-routes.onrender.com/api/otp/reset-password', {
         email,
         newPassword,
       });

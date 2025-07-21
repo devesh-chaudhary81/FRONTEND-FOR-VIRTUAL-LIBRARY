@@ -76,6 +76,7 @@ function App() {
   <Route path="/forgot password" element={<ForgotPassword />} />
   <Route path="/read/:id" element={<ReadBook />} />
   <Route path="/userDashboard" element={<UserDashboard />} />
+  {/* <Route path="/categories/:categorySlug" element={<Categories />} /> */}
 </Routes>
     </BrowserRouter>
   );

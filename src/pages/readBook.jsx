@@ -13,7 +13,7 @@ const { id } = useParams();
 useEffect(() => {
   const fetchBook = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/books/${id}`);
+      const res = await axios.get(`https://api-routes.onrender.com/api/books/${id}`);
       setBook(res.data);
     } catch (error) {
       console.error('Failed to fetch book:', error);

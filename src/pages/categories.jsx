@@ -84,7 +84,7 @@
 // export default Categories;
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import { BookOpen } from 'lucide-react'; // premium book icon
 
 import coding from '../assets/coding.jpg';
@@ -110,13 +110,13 @@ const categories = [
   { title: "Literature and Fiction", img: literature, link: "/literature-fiction" },
   { title: "Current affairs and news", img: currentAffairs, link: "/currentAffairs-news" },
   { title: "Career and Professional", img: career, link: "/career-professional" },
-  { title: "Anime and Manga", img: anime, link: "/anime-manga" },
+  { title: "Anime and Manga", img: anime, link: "anime-manga" },
   { title: "Creativity and Entertainment", img: creativity, link: "/creativity-entertainment" },
   { title: "Hindi Sahitya", img: hindi, link: "/hindi-sahitya" },
   { title: "Diy Hobbies and Lifestyle", img: hobbies, link: "/hobbies-lifestyle" },
   { title: "For Kids", img: kids, link: "/for-kids" },
   { title: "Language and Culture", img: language, link: "/language-culture" },
-  { title: "Mythology and History", img: mythology, link: "/mythology-history" },
+  { title: "Mythology and History", img: mythology, link:"/mythology-history" },
   { title: "Religion and Spirituality", img: religion, link: "/spirituality-religion" },
   { title: "Science and Technology", img: science, link: "/science-technology" },
   { title: "Self-help and Lifestyle", img: selfHelp, link: "/selfhelp-lifestyle" },

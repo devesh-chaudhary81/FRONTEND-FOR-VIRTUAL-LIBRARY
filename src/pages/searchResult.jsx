@@ -303,7 +303,7 @@ const SearchResults = () => {
     if (!userId) return toast.error("User not logged in.");
 
     try {
-      await axios.post("http://localhost:3000/api/users/shelf/add", {
+      await axios.post("https://api-routes.onrender.com/api/users/shelf/add", {
         userId,
         bookId,
       });
@@ -320,7 +320,7 @@ const SearchResults = () => {
     if (!userId) return toast.error("User not logged in.");
 
     try {
-      await axios.post("http://localhost:3000/api/users/favourites/add", {
+      await axios.post("https://api-routes.onrender.com/api/users/favourites/add", {
         userId,
         bookId,
       });

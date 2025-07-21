@@ -41,7 +41,7 @@ const UserDashboard = () => {
 
   const fetchFavourites = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/users/favourites/${userId}`);
+      const res = await axios.get(`https://api-routes.onrender.com/api/users/favourites/${userId}`);
       setFavourites(res.data);
     } catch (error) {
       console.error('Favourites error:', error);
@@ -50,7 +50,7 @@ const UserDashboard = () => {
 
   const fetchMyShelf = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/users/shelf/${userId}`);
+      const res = await axios.get(`https://api-routes.onrender.com/api/users/shelf/${userId}`);
       setShelf(res.data);
     } catch (error) {
       console.error('Shelf error:', error);
@@ -59,7 +59,7 @@ const UserDashboard = () => {
 
   const fetchFeedbacks = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/feedback`, { params: { userId } });
+      const res = await axios.get(`https://api-routes.onrender.com/api/feedback`, { params: { userId } });
       setFeedbacks(res.data);
     } catch (error) {
       console.error('Feedback fetch error:', error);
