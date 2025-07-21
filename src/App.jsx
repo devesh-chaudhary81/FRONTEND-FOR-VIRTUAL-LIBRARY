@@ -29,6 +29,7 @@ import ReadBook from './pages/readBook';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -41,7 +42,10 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
+         HEAD
         theme="dark"  // options: light | dark | colored
+
+       
       />
       <Routes>
   <Route path="/" element={<Home />} />
