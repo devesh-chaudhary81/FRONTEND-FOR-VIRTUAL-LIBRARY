@@ -86,7 +86,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
 import { BookOpen } from 'lucide-react'; // premium book icon
-
+import Sidebar from '../components/sidebar';
 import coding from '../assets/coding.jpg';
 import education from '../assets/education.jpg';
 import literature from '../assets/literature-fiction.jpg';
@@ -126,7 +126,7 @@ const categories = [
 const Categories = () => {
   return (
    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#0c4a6e] text-white py-10">
-
+   <div><Sidebar/></div>
       <div className="text-center mb-10">
         <div className="flex justify-center items-center gap-3 mb-2">
           <BookOpen size={36} className="text-yellow-400 drop-shadow-lg" />

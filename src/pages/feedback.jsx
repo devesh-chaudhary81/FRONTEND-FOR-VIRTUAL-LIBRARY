@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import {toast} from 'react-toastify';
+import Sidebar from '../components/sidebar';
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
     fullName: '',
@@ -53,6 +54,7 @@ const FeedbackForm = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-950 to-black p-4">
+      <div><Sidebar/></div>
       <div className="w-full max-w-4xl bg-blue-950/40 border border-blue-700 rounded-2xl p-10 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-md">
         <div className="text-center mb-10">
           <h1 className="text-blue-400 text-5xl md:text-6xl font-extrabold tracking-tight drop-shadow-[0_2px_4px_black]">

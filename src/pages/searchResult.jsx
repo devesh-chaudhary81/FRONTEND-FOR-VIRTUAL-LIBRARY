@@ -331,6 +331,23 @@ const SearchResults = () => {
     }
   };
 
+// const generateSummary = async (bookId) => {
+//     const user = JSON.parse(localStorage.getItem("user"));
+//     const userId = user?._id;
+//     if (!userId) return toast.error("User not logged in.");
+
+//     try {
+//       await axios.post("https://api-routes.onrender.com/api/users/shelf/add", {
+//         userId,
+//         bookId,
+//       });
+//       toast.success("Book added to MyShelf");
+//     } catch (err) {
+//       console.error(err);
+//       toast.error("Failed to add to MyShelf");
+//     }
+//   };
+
   return (
     <div className="bg-gradient-to-br from-[#0a0a1f] via-[#0a3473] to-[#0a0d6a] min-h-screen py-10 px-4 text-white">
       <div className="text-center mb-12">
@@ -384,6 +401,12 @@ const SearchResults = () => {
                   >
                     <Plus size={16} /> Add to MyShelf
                   </button>
+                  {/* <button
+                    onClick={() => handleSummary(book._id)}
+                    className="flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-500 text-black font-bold py-2 rounded-md text-sm border border-yellow-700"
+                  >
+                    <Plus size={16} /> Generate Summary
+                  </button> */}
                 </div>
               </div>
             </div>

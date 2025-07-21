@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Sidebar from '../components/sidebar';
 
 const AboutUs = () => {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-blue-950 to-black text-white flex flex-col items-center px-6 py-12 font-[Poppins]">
+      <div><Sidebar/></div>
       <h1 className="text-4xl md:text-5xl font-bold text-blue-400 text-center drop-shadow mb-6">
         Welcome to Antarix 🚀
       </h1>
