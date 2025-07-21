@@ -103,8 +103,8 @@ const UserDashboard = () => {
             <h3 className="text-xl font-bold text-purple-700 mb-4">📚 MyShelf</h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {shelf.map(({ bookId }) => (
-                <div key={bookId._id} className="bg-white p-4 shadow rounded-xl border border-gray-200">
-                  <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-cover rounded-lg mb-2" />
+                <div key={bookId._id} className="bg-white p-4 h-[300px] w-[300px] shadow rounded-xl border border-gray-200">
+                  <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-contain rounded-lg mb-2" />
                   <h4 className="font-bold text-lg">{bookId.title}</h4>
                   <p className="text-sm text-gray-500">{bookId.author}</p>
                   <a href={`/read/${bookId._id}`} className="text-purple-600 hover:underline text-sm mt-1 inline-block">▶️ Read Book</a>

@@ -152,7 +152,7 @@ const Categories = () => {
               />
             </div>
             <div className="p-4 text-center ">
-              <p className="text-lg text-blue-950 font-semibold text-white">{cat.title}</p>
+              <p className="text-lg text-blue-950 font-semibold text-black">{cat.title}</p>
             </div>
           </Link>
         ))}

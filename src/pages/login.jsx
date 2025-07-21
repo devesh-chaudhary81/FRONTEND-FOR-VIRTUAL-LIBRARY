@@ -38,7 +38,7 @@ const Login = () => {
 
       toast.success(response.data.message || 'Login successful');
       navigate('/home');
-      toast.success("Login Successful");
+      // toast.success("Login Successful");
       // window.location.reload();
 
     } catch (error) {
