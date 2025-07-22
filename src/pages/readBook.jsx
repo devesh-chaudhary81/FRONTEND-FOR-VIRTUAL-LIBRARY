@@ -40,7 +40,7 @@ const ReadBook = () => {
         const cloudinaryURL = res.data.contentURL;
         setBookURL(cloudinaryURL);
 
-        await axios.post("http://localhost:3000/api/books/open", {
+        await axios.post("https://api-routes.onrender.com/api/books/open", {
           url: cloudinaryURL,
           bookId: id,
         });
@@ -78,7 +78,7 @@ const ReadBook = () => {
     setIsGenerating(true); // Start loader
 
     try {
-      const res = await axios.post("http://localhost:3000/api/books/summary-by-range", {
+      const res = await axios.post("https://api-routes.onrender.com/api/books/summary-by-range", {
         pdfUrl: bookURL,
         startPage: start,
         endPage: end,
