@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -19,25 +18,24 @@ const Sidebar = () => {
 
   return (
     <div className="relative">
-      {/* Hamburger Icon - show only when sidebar is closed */}
-      {!isOpen && (
-        <button
-          className="text-white bg-blue-600 p-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 fixed top-5 left-5 z-50"
-          onClick={toggleSidebar}
-        >
-          <FaBars size={24} />
-        </button>
-      )}
+      {/* Hamburger Icon - only on small screens */}
+      <button
+        className="text-white bg-blue-600 p-3 rounded-md shadow-md hover:bg-blue-700 transition duration-300 fixed top-5 left-5 z-50 lg:hidden"
+        onClick={toggleSidebar}
+      >
+        <FaBars size={24} />
+      </button>
 
       {/* Sidebar */}
       <div
-        className={`fixed top-0 left-0 h-full w-64 bg-gradient-to-br from-blue-950 to-black text-white p-6 transition-transform duration-500 z-40 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        } shadow-2xl`}
+        className={`fixed top-0 left-0 h-screen w-64 bg-gradient-to-br from-blue-950 to-black text-white p-6 z-40 shadow-2xl
+          transition-transform duration-500 
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+          lg:translate-x-0 lg:static lg:block`}
       >
-        {/* Close (X) Icon inside sidebar */}
+        {/* Close (X) Icon - only on small screens */}
         <button
-          className="absolute top-5 right-5 text-white hover:text-blue-300 transition"
+          className="absolute top-5 right-5 text-white hover:text-blue-300 transition lg:hidden"
           onClick={toggleSidebar}
         >
           <FaTimes size={22} />
@@ -52,16 +50,16 @@ const Sidebar = () => {
             <Link
               to="/"
               onClick={handleLinkClick}
-              className="w-full flex items-center gap-4 px-4 py-3  bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg drop-shadow-[0_0_4px_#00ffff] transition duration-300 hover:scale-[1.02]"
+              className="w-full flex items-center gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg drop-shadow-[0_0_4px_#00ffff] transition duration-300 hover:scale-[1.02]"
             >
               <FaHome /> <span>Home</span>
             </Link>
           </li>
           <li>
             <Link
-              to="/about"
+              to="/about-us"
               onClick={handleLinkClick}
-              className="w-full flex items-center gap-4 px-4 drop-shadow-[0_0_4px_#00ffff] py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg transition duration-300 hover:scale-[1.02]"
+              className="w-full flex items-center gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg drop-shadow-[0_0_4px_#00ffff] transition duration-300 hover:scale-[1.02]"
             >
               <FaInfoCircle /> <span>About Us</span>
             </Link>
@@ -70,7 +68,7 @@ const Sidebar = () => {
             <Link
               to="/feedback"
               onClick={handleLinkClick}
-              className="w-full flex items-center gap-4 drop-shadow-[0_0_4px_#00ffff] px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg transition duration-300 hover:scale-[1.02]"
+              className="w-full flex items-center gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg drop-shadow-[0_0_4px_#00ffff] transition duration-300 hover:scale-[1.02]"
             >
               <FaCommentDots /> <span>Feedback</span>
             </Link>
@@ -79,7 +77,7 @@ const Sidebar = () => {
             <Link
               to="/categories"
               onClick={handleLinkClick}
-              className="w-full flex items-center drop-shadow-[0_0_4px_#00ffff] gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg transition duration-300 hover:scale-[1.02]"
+              className="w-full flex items-center gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg drop-shadow-[0_0_4px_#00ffff] transition duration-300 hover:scale-[1.02]"
             >
               <FaThList /> <span>Categories</span>
             </Link>
@@ -88,7 +86,7 @@ const Sidebar = () => {
             <Link
               to="/userDashboard"
               onClick={handleLinkClick}
-              className="w-full flex items-center gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black drop-shadow-[0_0_4px_#00ffff] hover:bg-blue-400 rounded-xl shadow-lg transition duration-300 hover:scale-[1.02]"
+              className="w-full flex items-center gap-4 px-4 py-3 bg-gradient-to-br from-blue-950 to-black hover:bg-blue-400 rounded-xl shadow-lg drop-shadow-[0_0_4px_#00ffff] transition duration-300 hover:scale-[1.02]"
             >
               <FaUserCircle /> <span>My Profile</span>
             </Link>
@@ -100,3 +98,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+

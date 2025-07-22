@@ -84,9 +84,10 @@
 // export default Categories;
 
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { BookOpen } from 'lucide-react'; // premium book icon
+import { Link } from 'react-router-dom';
+import { BookOpen } from 'lucide-react';
 import Sidebar from '../components/sidebar';
+
 import coding from '../assets/coding.jpg';
 import education from '../assets/education.jpg';
 import literature from '../assets/literature-fiction.jpg';
@@ -125,41 +126,51 @@ const categories = [
 
 const Categories = () => {
   return (
-   <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#0c4a6e] text-white py-10">
-   <div><Sidebar/></div>
-      <div className="text-center mb-10">
-        <div className="flex justify-center items-center gap-3 mb-2">
-          <BookOpen size={36} className="text-yellow-400 drop-shadow-lg" />
-          <h1 className="text-4xl md:text-5xl font-bold font-sans drop-shadow-md">
-            Choose Your Category
-          </h1>
+    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#0c4a6e] text-white">
+      <div className="flex">
+        {/* Sidebar with fixed width on large screens */}
+        <div className="w-64 hidden lg:block sticky top-0 h-screen">
+          <Sidebar />
         </div>
-        <p className="text-blue-200 text-sm">Explore your favorite topics from our library</p>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {categories.map((cat, idx) => (
-          <Link
-            to={cat.link}
-            key={idx}
-            className="rounded-xl bg-[#e5f1f1] backdrop-blur-md border  border-white/20 hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-xl"
-          >
-            <div className="w-full h-40 overflow-hidden rounded-t-xl">
-              <img
-                src={cat.img}
-                alt={cat.title}
-                className="w-full h-full object-cover"
-              />
+        {/* Categories content */}
+        <div className="flex-grow py-10 px-4 md:px-8">
+          <div className="text-center mb-10">
+            <div className="flex justify-center items-center gap-3 mb-2">
+              <BookOpen size={36} className="text-yellow-400 drop-shadow-lg" />
+              <h1 className="text-4xl md:text-5xl font-bold font-sans drop-shadow-md">
+                Choose Your Category
+              </h1>
             </div>
-            <div className="p-4 text-center ">
-              <p className="text-lg text-blue-950 font-semibold text-black">{cat.title}</p>
-            </div>
-          </Link>
-        ))}
+            <p className="text-blue-200 text-sm">Explore your favorite topics from our library</p>
+          </div>
+
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
+            {categories.map((cat, idx) => (
+              <Link
+                to={cat.link}
+                key={idx}
+                className="rounded-xl bg-[#e5f1f1] backdrop-blur-md border border-white/20 hover:scale-105 transition-transform duration-300 shadow-md hover:shadow-xl"
+              >
+                <div className="w-full h-40 overflow-hidden rounded-t-xl">
+                  <img
+                    src={cat.img}
+                    alt={cat.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <p className="text-lg font-semibold text-blue-950">{cat.title}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Categories;
+
 
