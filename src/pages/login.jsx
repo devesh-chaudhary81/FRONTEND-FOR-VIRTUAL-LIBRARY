@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import bgImg from '../assets/background.jpg';
+import bgImg from '../assets/signup-bg.png';
 import { Link, useNavigate } from 'react-router-dom';
 import {toast} from 'react-toastify';
 
@@ -52,10 +52,10 @@ const Login = () => {
       <img
         src={bgImg}
         alt="Background"
-        className="absolute w-[110%] h-[110%] object-cover filter blur-[2.5px] brightness-[0.85] contrast-[1.1] saturate-[1.2] z-0"
+        className="absolute w-[110%] h-[110%] object-cover filter blur-[2px] brightness-[0.85] contrast-[1.1] saturate-[1.2] z-0"
       />
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black/50 z-10"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
 
       <div className="relative z-20 w-[90%] max-w-md bg-black/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 text-white">
         <h2 className="text-3xl font-bold text-center mb-2 text-white drop-shadow-md">

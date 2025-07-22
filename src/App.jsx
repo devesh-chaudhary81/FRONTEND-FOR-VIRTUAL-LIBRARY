@@ -28,6 +28,7 @@ import ForgotPassword from './pages/forget-pass';
 import ReadBook from './pages/readBook';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import EditProfile from './pages/edit-profile';
 
 
 function App() {
@@ -77,7 +78,7 @@ function App() {
   <Route path="/read/:id" element={<ReadBook />} />
   <Route path="/read" element={<ReadBook />} />
   <Route path="/userDashboard" element={<UserDashboard />} />
-  {/* <Route path="/categories/:categorySlug" element={<Categories />} /> */}
+  <Route path="/edit-profile" element={<EditProfile />} />
 </Routes>
     </BrowserRouter>
   );
