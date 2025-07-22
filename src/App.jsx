@@ -29,6 +29,7 @@ import ReadBook from './pages/readBook';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/edit-profile';
+import Dashboard from './components/Dashboard';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
   <Route path="/login" element={<Login />} />
   <Route path="/signup" element={<Signup />} />
   <Route path="/education-academics" element={<EducationAcademics />} />
+  <Route path="/dashboard" element={<Dashboard />}></Route>
   <Route path="/science-technology" element={<ScienceTechnology />} />
   <Route path="/anime-manga" element={<AnimeManga />} />
   <Route path="/career-professional" element={<CareerProfessional />} />
