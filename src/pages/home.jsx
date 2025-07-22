@@ -130,6 +130,7 @@ import logo from "../assets/logo3.jpg";
 import backgroundImage from "../assets/background2.png";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/footer";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -165,10 +166,10 @@ const Home = () => {
     <>
       {/* Background */}
       <div
-        className="fixed top-0 left-0 w-full min-h-screen h-full bg-cover bg-center opacity-1 -z-10"
+        className="fixed top-0  left-0 w-full min-h-screen h-full bg-cover bg-center opacity-1 -z-10"
         style={{ backgroundImage: `url(${backgroundImage})` }}
       ></div>
-      <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-10 -z-10"></div>
+      <div className="fixed top-0 backdrop-blur-sm left-0 w-full h-full bg-black bg-opacity-10 -z-10"></div>
 
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-[Inter] text-[#D1D9FF] min-h-screen">
@@ -214,7 +215,7 @@ const Home = () => {
               {user ? (
                 <Link to="/userDashboard">
                   <button className="bg-blue-900 text-white px-5 py-1 rounded-lg text-sm hover:bg-white hover:text-blue-900 transition">
-                    Me
+                    My_Profile
                   </button>
                 </Link>
               ) : (
@@ -234,7 +235,7 @@ const Home = () => {
           <h1 className="text-white text-5xl sm:text-6xl font-playfair drop-shadow-[8px_4px_5px_rgb(43,1,254)]">
             Welcome to <span className="text-[#4A69E2]">Antarix</span>
           </h1>
-         <p className="mt-6 text-white font-medium text-lg max-w-xl mx-auto px-6 py-3 rounded-md bg-black/40 backdrop-blur-sm shadow-md leading-relaxed">
+         <p className="mt-6 text-white font-medium text-lg max-w-xl mx-auto px-6 py-3 rounded-md ">
   Explore a universe of stories, knowledge, and imagination. Your next great read is just a search away.
 </p>
 
@@ -301,6 +302,7 @@ const Home = () => {
           </div>
         </section>
       </div>
+      <div><Footer/></div>
     </>
   );
 };
