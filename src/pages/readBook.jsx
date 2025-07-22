@@ -252,40 +252,56 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 const ReadBook = () => {
   const { id } = useParams();
   const [bookURL, setBookURL] = useState(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(null);
   const [summary, setSummary] = useState("");
-  const [inputPage, setInputPage] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [jumpToPageFn, setJumpToPageFn] = useState(null);
+   const [inputPage, setInputPage] = useState("");
+    const [totalPages, setTotalPages] = useState(null);
 
-  // PDF layout plugin
   const defaultLayoutPluginInstance = defaultLayoutPlugin({
     onPageChange: (e) => {
-      setCurrentPage(e.currentPage + 1);
+      const newPage = e.currentPage + 1;
+      setCurrentPage(newPage);
+      localStorage.setItem(`lastPage-${id}`, newPage); // 🧠 Save page
     },
+    setJumpToPage: (fn) => setJumpToPageFn(() => fn),
   });
 
-  // Fetch book by ID
+  // 1️⃣ Fetch book and content URL
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const res = await axios.get(`https://api-routes.onrender.com/api/books/${id}`);
+        const res = await axios.get(
+          `https://api-routes.onrender.com/api/books/${id}`
+        );
         const cloudinaryURL = res.data.contentURL;
         setBookURL(cloudinaryURL);
 
-        // Optional: notify backend on book open
         await axios.post("http://localhost:3000/api/books/open", {
           url: cloudinaryURL,
           bookId: id,
         });
       } catch (err) {
-        console.error("Failed to fetch or open book:", err);
+        console.error("Error fetching book:", err);
       }
     };
     fetchBook();
   }, [id]);
 
-  // Handle summary request manually
-  const handleGenerateSummary = async () => {
+  // 2️⃣ Resume last page once Viewer is ready
+  useEffect(() => {
+    if (!bookURL || !jumpToPageFn) return;
+
+    const savedPage = localStorage.getItem(`lastPage-${id}`);
+    if (savedPage) {
+      console.log("jump successfull");
+      jumpToPageFn(Number(savedPage) - 1); // PDF pages are 0-indexed
+      setCurrentPage(Number(savedPage));
+    }
+  }, [bookURL, jumpToPageFn, id]);
+
+  // 3️⃣ Get summary on button click
+ const handleGenerateSummary = async () => {
     if (!inputPage || isNaN(inputPage) || inputPage < 1 || inputPage > totalPages) {
       alert("Please enter a valid page number.");
       return;
@@ -305,29 +321,26 @@ const ReadBook = () => {
   if (!bookURL) return <p className="text-center mt-10 text-white">🔄 Loading book...</p>;
 
   return (
-    <div className="flex flex-col bg-black text-white min-h-screen p-6">
-      {/* <h1 className="text-2xl font-bold mb-4 text-center">📖 Reading PDF Book</h1> */}
+    <div className="flex flex-col md:flex-row h-screen">
+      <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden">
+        {bookURL ? (
+          <Worker
+            workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
+          >
+            <div className="h-full overflow-hidden">
+              <Viewer
+                fileUrl={bookURL}
+                plugins={[defaultLayoutPluginInstance]}
+                 onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
+              />
+            </div>
+          </Worker>
+        ) : (
+          <div className="text-center mt-10">Loading book...</div>
+        )}
+      </div>
 
-      <div className="flex flex-col lg:flex-row gap-6 w-full justify-center">
-        {/* PDF Viewer Section */}
-       <div className="w-full lg:w-3/4 bg-white shadow-lg rounded relative overflow-hidden border border-gray-200">
-  <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-    <Viewer
-      fileUrl={bookURL}
-      plugins={[defaultLayoutPluginInstance]}
-      onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
-    />
-  </Worker>
-
-  {/* Floating page counter at bottom right */}
-  <div className="absolute bottom-2 right-4 bg-black/70 text-white text-sm px-3 py-1 rounded-full shadow">
-    📄 Page {currentPage} of {totalPages || "Loading..."}
-  </div>
-</div>
-
-
-        {/* Summary Section */}
-        <div className="w-full lg:w-1/4 bg-white text-black p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
+     <div className="w-full lg:w-1/4 bg-white text-black p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
 
           <h2 className="text-lg font-semibold mb-2">🧠 Generate Summary</h2>
 
@@ -351,7 +364,7 @@ const ReadBook = () => {
 
           {summary && (
   <div className="mt-6 w-full max-w-5xl bg-white text-black p-4 rounded shadow-md">
-    <h2 className="text-lg font-semibold mb-2">🧠 Summary of Page {currentPage}</h2>
+    <h2 className="text-lg font-semibold mb-2">🧠 Summary of Page {inputPage}</h2>
     <div className="prose max-w-none">
       <ReactMarkdown>{summary}</ReactMarkdown>
     </div>
@@ -359,7 +372,7 @@ const ReadBook = () => {
 )}
         </div>
       </div>
-    </div>
+    
   );
 };
 
