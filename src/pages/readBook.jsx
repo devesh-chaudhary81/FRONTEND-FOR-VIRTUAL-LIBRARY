@@ -1,250 +1,10 @@
-
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import axios from 'axios';
-// const ReadBook = () => {
-//   const [book, setBook] = useState(null);
-// const { id } = useParams();
-
-// useEffect(() => {
-//   const fetchBook = async () => {
-//     try {
-//       const res = await axios.get(`https://api-routes.onrender.com/api/books/${id}`);
-//       setBook(res.data);
-//     } catch (error) {
-//       console.error('Failed to fetch book:', error);
-//     }
-//   };
-
-//   fetchBook();
-// }, [id]);
-
-//   if (!book) return <p className="text-center mt-10">🔄 Loading book...</p>;
-
-//   return (
-//     <div className="p-4 bg-black min-h-screen">
-//       <h2 className="text-2xl font-bold mb-4 text-white text-center">{book.title}</h2>
-//       <div className="flex justify-center">
-//         <iframe
-//   src={`https://docs.google.com/gview?url=${book.contentURL}&embedded=true`}
-//   title={book.title}
-//   width="90%"
-//   height="800px"
-//   className="border rounded shadow-lg"
-// />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ReadBook;
-
-// import React, { useEffect, useState } from 'react';
-// import { useParams } from 'react-router-dom';
-// import axios from 'axios';
-// import { Document, Page, pdfjs } from 'react-pdf';
-// import pdfWorker from 'pdfjs-dist/build/pdf.worker.entry'; // ✅ This line
-
-// pdfjs.GlobalWorkerOptions.workerSrc = pdfWorker; // ✅ This line
-
-
-// const ReadBook = () => {
-//   const { id } = useParams();
-//   const [book, setBook] = useState(null);
-//   const [numPages, setNumPages] = useState(null);
-//   const [pageNumber, setPageNumber] = useState(1);
-//   const [summary, setSummary] = useState('');
-//   const [loadingSummary, setLoadingSummary] = useState(false);
-
-//   useEffect(() => {
-//     const fetchBook = async () => {
-//       try {
-//         const res = await axios.get(`https://api-routes.onrender.com/api/books/${id}`);
-//         setBook(res.data);
-//       } catch (error) {
-//         console.error('Failed to fetch book:', error);
-//       }
-//     };
-//     fetchBook();
-//   }, [id]);
-
-//   const handleTextExtract = async (items) => {
-//     const text = items.map((item) => item.str).join(' ');
-//     if (text.length < 50) return; // avoid summarizing empty/short pages
-
-//     try {
-//       setLoadingSummary(true);
-//       const res = await axios.post('https://your-backend.com/api/summary', {
-//         text,
-//       });
-//       setSummary(res.data.summary);
-//     } catch (err) {
-//       console.error('Summary failed:', err);
-//     } finally {
-//       setLoadingSummary(false);
-//     }
-//   };
-
-//   if (!book) return <p className="text-center mt-10 text-white">🔄 Loading book...</p>;
-
-//   return (
-//     <div className="flex bg-black min-h-screen p-4 gap-4">
-//       {/* PDF Viewer */}
-//       <div className="w-2/3 bg-white rounded shadow-lg p-2">
-//         <h2 className="text-xl font-bold text-center mb-2">{book.title}</h2>
-//         <Document
-//           file={book.contentURL}
-//           onLoadSuccess={({ numPages }) => setNumPages(numPages)}
-//           loading="Loading PDF..."
-//         >
-//           <Page
-//             pageNumber={pageNumber}
-//             onGetTextSuccess={handleTextExtract}
-//           />
-//         </Document>
-//         <div className="flex justify-between mt-4">
-//           <button
-//             className="px-3 py-1 bg-gray-300 rounded"
-//             onClick={() => setPageNumber((prev) => Math.max(prev - 1, 1))}
-//           >
-//             ⬅ Prev
-//           </button>
-//           <span className="text-white">
-//             Page {pageNumber} of {numPages}
-//           </span>
-//           <button
-//             className="px-3 py-1 bg-gray-300 rounded"
-//             onClick={() => setPageNumber((prev) => Math.min(prev + 1, numPages))}
-//           >
-//             Next ➡
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Summary Sidebar */}
-//       <div className="w-1/3 bg-gray-900 text-white rounded p-4 shadow-inner">
-//         <h3 className="text-lg font-bold mb-2">📄 Page Summary</h3>
-//         {loadingSummary ? (
-//           <p>🔄 Generating summary...</p>
-//         ) : (
-//           <p className="text-sm whitespace-pre-wrap">{summary || "No summary yet."}</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ReadBook;
-
-
-// import React, { useState } from "react";
-// import { Viewer, Worker } from "@react-pdf-viewer/core";
-// import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-// import "@react-pdf-viewer/core/lib/styles/index.css";
-// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-
-// // ✅ Replace this with your actual Cloudinary URL
-// const pdfURL = "https://res.cloudinary.com/dasbxk3b7/raw/upload/v1752395355/All_books/j1pofrpdt2ircuofms9l.pdf";
-
-// const ReadBook = () => {
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [totalPages, setTotalPages] = useState(null);
-
-//   // Plugin to track page changes
-//   const defaultLayoutPluginInstance = defaultLayoutPlugin({
-//     onPageChange: (e) => {
-//       setCurrentPage(e.currentPage + 1);
-//     },
-//   });
-
-//   return (
-//     <div className="flex flex-col items-center bg-black text-white min-h-screen p-6">
-//       <h1 className="text-2xl font-bold mb-4">📖 Reading PDF Book</h1>
-//       <div className="w-full max-w-5xl bg-white shadow-lg rounded">
-//         <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-//           <Viewer
-//             fileUrl={pdfURL}
-//             plugins={[defaultLayoutPluginInstance]}
-//             onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
-//           />
-//         </Worker>
-//       </div>
-//       <div className="mt-4">
-//         <p>
-//           📄 Page {currentPage} of {totalPages || "Loading..."}
-//         </p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ReadBook;
-
-
-// import React, { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
-// import { Viewer, Worker } from "@react-pdf-viewer/core";
-// import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
-// import axios from "axios";
-// import "@react-pdf-viewer/core/lib/styles/index.css";
-// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-
-// const ReadBook = () => {
-//   const { id } = useParams(); // <-- Get book ID from URL
-//   const [bookURL, setBookURL] = useState(null);
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const [totalPages, setTotalPages] = useState(null);
-
-//   // Plugin for layout and tracking page changes
-//   const defaultLayoutPluginInstance = defaultLayoutPlugin({
-//     onPageChange: (e) => {
-//       setCurrentPage(e.currentPage + 1);
-//     },
-//   });
-
-//   useEffect(() => {
-//     const fetchBook = async () => {
-//       try {
-//         const res = await axios.get(`https://api-routes.onrender.com/api/books/${id}`);
-//         setBookURL(res.data.contentURL); // Get contentURL from response
-//       } catch (err) {
-//         console.error("Failed to fetch book:", err);
-//       }
-//     };
-//     fetchBook();
-//   }, [id]);
-
-//   if (!bookURL) return <p className="text-center mt-10 text-white">🔄 Loading book...</p>;
-
-//   return (
-//     <div className="flex flex-col items-center bg-black text-white min-h-screen p-6">
-//       <h1 className="text-2xl font-bold mb-4">📖 Reading PDF Book</h1>
-//       <div className="w-full max-w-5xl bg-white shadow-lg rounded">
-//         <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
-//           <Viewer
-//             fileUrl={bookURL}
-//             plugins={[defaultLayoutPluginInstance]}
-//             onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
-//           />
-//         </Worker>
-//       </div>
-//       <div className="mt-4">
-//         <p>📄 Page {currentPage} of {totalPages || "Loading..."}</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ReadBook;
-
-
-
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import {toast} from 'react-toastify';
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
@@ -255,19 +15,22 @@ const ReadBook = () => {
   const [summary, setSummary] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [jumpToPageFn, setJumpToPageFn] = useState(null);
-   const [inputPage, setInputPage] = useState("");
-    const [totalPages, setTotalPages] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
+
+  const [startPage, setStartPage] = useState("");
+  const [endPage, setEndPage] = useState("");
+
+  const [isGenerating, setIsGenerating] = useState(false); // Loader State
 
   const defaultLayoutPluginInstance = defaultLayoutPlugin({
     onPageChange: (e) => {
       const newPage = e.currentPage + 1;
       setCurrentPage(newPage);
-      localStorage.setItem(`lastPage-${id}`, newPage); // 🧠 Save page
+      localStorage.setItem(`lastPage-${id}`, newPage);
     },
     setJumpToPage: (fn) => setJumpToPageFn(() => fn),
   });
 
-  // 1️⃣ Fetch book and content URL
   useEffect(() => {
     const fetchBook = async () => {
       try {
@@ -288,33 +51,43 @@ const ReadBook = () => {
     fetchBook();
   }, [id]);
 
-  // 2️⃣ Resume last page once Viewer is ready
   useEffect(() => {
     if (!bookURL || !jumpToPageFn) return;
 
     const savedPage = localStorage.getItem(`lastPage-${id}`);
     if (savedPage) {
-      console.log("jump successfull");
-      jumpToPageFn(Number(savedPage) - 1); // PDF pages are 0-indexed
+      jumpToPageFn(Number(savedPage) - 1);
       setCurrentPage(Number(savedPage));
     }
   }, [bookURL, jumpToPageFn, id]);
 
-  // 3️⃣ Get summary on button click
- const handleGenerateSummary = async () => {
-    if (!inputPage || isNaN(inputPage) || inputPage < 1 || inputPage > totalPages) {
-      alert("Please enter a valid page number.");
+  const handleGenerateSummary = async () => {
+    const start = Number(startPage);
+    const end = Number(endPage);
+
+    if (
+      isNaN(start) || isNaN(end) ||
+      start < 1 || end < 1 ||
+      start > totalPages || end > totalPages ||
+      end < start || end - start > 20
+    ) {
+      toast.warn("Please enter a valid page range (Max: 20 pages).");
       return;
     }
 
+    setIsGenerating(true); // Start loader
+
     try {
-      const res = await axios.post("http://localhost:3000/api/books/summary-by-page", {
+      const res = await axios.post("http://localhost:3000/api/books/summary-by-range", {
         pdfUrl: bookURL,
-        pageNumber: Number(inputPage),
+        startPage: start,
+        endPage: end,
       });
       setSummary(res.data.summary);
     } catch (err) {
       console.error("Error generating summary:", err);
+    } finally {
+      setIsGenerating(false); // Stop loader
     }
   };
 
@@ -324,14 +97,12 @@ const ReadBook = () => {
     <div className="flex flex-col md:flex-row h-screen">
       <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden">
         {bookURL ? (
-          <Worker
-            workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
-          >
+          <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
             <div className="h-full overflow-hidden">
               <Viewer
                 fileUrl={bookURL}
                 plugins={[defaultLayoutPluginInstance]}
-                 onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
+                onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
               />
             </div>
           </Worker>
@@ -340,41 +111,217 @@ const ReadBook = () => {
         )}
       </div>
 
-     <div className="w-full lg:w-1/4 bg-white text-black p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
+      {/* Summary Sidebar */}
+      <div className="w-full lg:w-1/4 bg-black text-white p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
+        <h2 className="text-lg font-semibold mb-2">🧠 Prepare your notes...</h2>
 
-          <h2 className="text-lg font-semibold mb-2">🧠 Generate Summary</h2>
-
-          <div className="flex items-center mb-4 gap-2">
-            <input
-              type="number"
-              value={inputPage}
-              onChange={(e) => setInputPage(e.target.value)}
-              className="border border-gray-300 p-2 rounded w-24"
-              placeholder="Page #"
-              min={1}
-              max={totalPages}
-            />
-            <button
-              onClick={handleGenerateSummary}
-              className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700"
-            >
-              Generate
-            </button>
-          </div>
-
-          {summary && (
-  <div className="mt-6 w-full max-w-5xl bg-white text-black p-4 rounded shadow-md">
-    <h2 className="text-lg font-semibold mb-2">🧠 Summary of Page {inputPage}</h2>
-    <div className="prose max-w-none">
-      <ReactMarkdown>{summary}</ReactMarkdown>
-    </div>
-  </div>
-)}
+        <div className="flex flex-col gap-2 mb-4">
+          <input
+            type="number"
+            value={startPage}
+            onChange={(e) => setStartPage(e.target.value)}
+            className="border border-gray-300 p-2 text-black rounded w-full"
+            placeholder="Start Page"
+            min={1}
+            max={totalPages}
+          />
+          <input
+            type="number"
+            value={endPage}
+            onChange={(e) => setEndPage(e.target.value)}
+            className="border border-gray-300 p-2 text-black rounded w-full"
+            placeholder="End Page"
+            min={1}
+            max={totalPages}
+          />
+          <button
+            onClick={handleGenerateSummary}
+            disabled={isGenerating}
+            className={`flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition ${
+              isGenerating ? "opacity-70 cursor-not-allowed" : ""
+            }`}
+          >
+            {isGenerating ? (
+              <>
+                <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="white"
+                    strokeWidth="4"
+                  />
+                  <path
+                    className="opacity-75"
+                    fill="white"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  />
+                </svg>
+                Generating...
+              </>
+            ) : (
+              "Generate Notes"
+            )}
+          </button>
         </div>
+
+        {summary && (
+          <div className="mt-6 w-full bg-white text-black p-4 rounded shadow-md">
+            <h2 className="text-lg font-semibold mb-2">
+              🧠 Here are Your Notes (Pages {startPage}–{endPage})
+            </h2>
+            <div className="prose max-w-none">
+              <ReactMarkdown>{summary}</ReactMarkdown>
+            </div>
+          </div>
+        )}
       </div>
-    
+    </div>
   );
 };
 
 export default ReadBook;
+
+
+
+
+// import React, { useEffect, useState } from "react";
+// import { useParams } from "react-router-dom";
+// import { Viewer, Worker } from "@react-pdf-viewer/core";
+// import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
+// import axios from "axios";
+// import ReactMarkdown from "react-markdown";
+
+// import "@react-pdf-viewer/core/lib/styles/index.css";
+// import "@react-pdf-viewer/default-layout/lib/styles/index.css";
+
+// const ReadBook = () => {
+//   const { id } = useParams();
+//   const [bookURL, setBookURL] = useState(null);
+//   const [summary, setSummary] = useState("");
+//   const [currentPage, setCurrentPage] = useState(1);
+//   const [jumpToPageFn, setJumpToPageFn] = useState(null);
+//    const [inputPage, setInputPage] = useState("");
+//     const [totalPages, setTotalPages] = useState(null);
+
+//   const defaultLayoutPluginInstance = defaultLayoutPlugin({
+//     onPageChange: (e) => {
+//       const newPage = e.currentPage + 1;
+//       setCurrentPage(newPage);
+//       localStorage.setItem(`lastPage-${id}`, newPage); // 🧠 Save page
+//     },
+//     setJumpToPage: (fn) => setJumpToPageFn(() => fn),
+//   });
+
+//   // 1️⃣ Fetch book and content URL
+//   useEffect(() => {
+//     const fetchBook = async () => {
+//       try {
+//         const res = await axios.get(
+//           `https://api-routes.onrender.com/api/books/${id}`
+//         );
+//         const cloudinaryURL = res.data.contentURL;
+//         setBookURL(cloudinaryURL);
+
+//         await axios.post("http://localhost:3000/api/books/open", {
+//           url: cloudinaryURL,
+//           bookId: id,
+//         });
+//       } catch (err) {
+//         console.error("Error fetching book:", err);
+//       }
+//     };
+//     fetchBook();
+//   }, [id]);
+
+//   // 2️⃣ Resume last page once Viewer is ready
+//   useEffect(() => {
+//     if (!bookURL || !jumpToPageFn) return;
+
+//     const savedPage = localStorage.getItem(`lastPage-${id}`);
+//     if (savedPage) {
+//       console.log("jump successfull");
+//       jumpToPageFn(Number(savedPage) - 1); // PDF pages are 0-indexed
+//       setCurrentPage(Number(savedPage));
+//     }
+//   }, [bookURL, jumpToPageFn, id]);
+
+//   // 3️⃣ Get summary on button click
+//  const handleGenerateSummary = async () => {
+//     if (!inputPage || isNaN(inputPage) || inputPage < 1 || inputPage > totalPages) {
+//       alert("Please enter a valid page number.");
+//       return;
+//     }
+
+//     try {
+//       const res = await axios.post("http://localhost:3000/api/books/summary-by-page", {
+//         pdfUrl: bookURL,
+//         pageNumber: Number(inputPage),
+//       });
+//       setSummary(res.data.summary);
+//     } catch (err) {
+//       console.error("Error generating summary:", err);
+//     }
+//   };
+
+//   if (!bookURL) return <p className="text-center mt-10 text-white">🔄 Loading book...</p>;
+
+//   return (
+//     <div className="flex flex-col md:flex-row h-screen">
+//       <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden">
+//         {bookURL ? (
+//           <Worker
+//             workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
+//           >
+//             <div className="h-full overflow-hidden">
+//               <Viewer
+//                 fileUrl={bookURL}
+//                 plugins={[defaultLayoutPluginInstance]}
+//                  onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
+//               />
+//             </div>
+//           </Worker>
+//         ) : (
+//           <div className="text-center mt-10">Loading book...</div>
+//         )}
+//       </div>
+
+//      <div className="w-full lg:w-1/4 bg-white text-black p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
+
+//           <h2 className="text-lg font-semibold mb-2">🧠 Generate Summary</h2>
+
+//           <div className="flex items-center mb-4 gap-2">
+//             <input
+//               type="number"
+//               value={inputPage}
+//               onChange={(e) => setInputPage(e.target.value)}
+//               className="border border-gray-300 p-2 rounded w-24"
+//               placeholder="Page #"
+//               min={1}
+//               max={totalPages}
+//             />
+//             <button
+//               onClick={handleGenerateSummary}
+//               className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700"
+//             >
+//               Generate
+//             </button>
+//           </div>
+
+//           {summary && (
+//   <div className="mt-6 w-full max-w-5xl bg-white text-black p-4 rounded shadow-md">
+//     <h2 className="text-lg font-semibold mb-2">🧠 Summary of Page {inputPage}</h2>
+//     <div className="prose max-w-none">
+//       <ReactMarkdown>{summary}</ReactMarkdown>
+//     </div>
+//   </div>
+// )}
+//         </div>
+//       </div>
+    
+//   );
+// };
+
+// export default ReadBook;
 

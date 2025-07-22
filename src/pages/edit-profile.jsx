@@ -50,7 +50,7 @@ const EditProfile = () => {
         updatedFields.password = formData.password;
       }
 
-      const res = await axios.put(`http://localhost:3000/api/users/${userId}`, updatedFields);
+      const res = await axios.put(`https://api-routes.onrender.com/api/users/${userId}`, updatedFields);
       if (res.status === 200) {
   // ✅ Save updated user to localStorage
   localStorage.setItem("user", JSON.stringify(res.data));
