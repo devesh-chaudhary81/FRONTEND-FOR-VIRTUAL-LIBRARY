@@ -273,7 +273,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { BookOpen, Star, Heart, Plus } from "lucide-react";
 import GenerateSummary from "../components/summary";
-
+import Navbar from "../components/sidebar";
 
 const SearchResults = () => {
   const navigate = useNavigate();
@@ -336,8 +336,8 @@ const SearchResults = () => {
 
   return (
     <div className="bg-gradient-to-br from-[#0a0a1f] via-[#0a3473] to-[#0a0d6a] min-h-screen py-10 px-4 text-white">
-      
-      <div className="text-center mb-12">
+      <div><Navbar/></div>
+      <div className="text-center mb-12 mt-8">
         <h2 className="text-4xl md:text-5xl font-extrabold text-yellow-400">
           Best Match for <span className="text-white">"{query}"</span>
         </h2>
@@ -395,6 +395,7 @@ const SearchResults = () => {
         </div>
       )}
     </div>
+    
   );
 };
 
