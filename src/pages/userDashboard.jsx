@@ -157,9 +157,13 @@ const UserDashboard = () => {
             <h3 className="text-2xl md:text-3xl font-bold mb-6 text-blue-950 text-center">📘 Favourite Books</h3>
             <div className="flex flex-wrap gap-4 justify-center">
               {favourites.map(book => (
-                <a key={book._id} href={`/read/${book._id}`} className="px-4 py-2 rounded-lg bg-blue-900 w-[90%] sm:w-[300px] text-white hover:bg-cyan-600 transition-all shadow-md text-left">
-                  {book.title}
-                </a>
+               <Link
+  key={book._id}
+  to={`/read/${book._id}`}
+  className="px-4 py-2 rounded-lg bg-blue-900 w-[90%] sm:w-[300px] text-white hover:bg-cyan-600 transition-all shadow-md text-left"
+>
+  {book.title}
+</Link>
               ))}
             </div>
           </motion.div>
@@ -175,7 +179,7 @@ const UserDashboard = () => {
                   <h4 className="text-lg font-semibold text-[#0a1f44] mb-1">{bookId.title}</h4>
                   <p className="text-sm text-[#1f3b56] mb-4">{bookId.author}</p>
                   <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-contain mb-4" />
-                  <Link to={`/read/${bookId._id}`} className="text-sm text-[#0a1f44] font-medium hover:underline">▶️ Read Book</Link>
+                  <Link key={bookId._id} to={`/read/${bookId._id}`} className="text-sm text-[#0a1f44] font-medium hover:underline">▶️ Read Book</Link>
                 </div>
               ))}
             </div>
