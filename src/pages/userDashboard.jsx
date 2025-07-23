@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import Navbar from '../components/sidebar';
+import { Link } from 'react-router-dom';
 import {
   PieChart,
   Pie,
@@ -174,7 +175,7 @@ const UserDashboard = () => {
                   <h4 className="text-lg font-semibold text-[#0a1f44] mb-1">{bookId.title}</h4>
                   <p className="text-sm text-[#1f3b56] mb-4">{bookId.author}</p>
                   <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-contain mb-4" />
-                  <a href={`/read/${bookId._id}`} className="text-sm text-[#0a1f44] font-medium hover:underline">▶️ Read Book</a>
+                  <Link to={`/read/${bookId._id}`} className="text-sm text-[#0a1f44] font-medium hover:underline">▶️ Read Book</Link>
                 </div>
               ))}
             </div>
