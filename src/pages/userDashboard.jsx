@@ -156,13 +156,13 @@ const UserDashboard = () => {
           <motion.div key="favourites" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <h3 className="text-2xl md:text-3xl font-bold mb-6 text-blue-950 text-center">📘 Favourite Books</h3>
             <div className="flex flex-wrap gap-4 justify-center">
-              {favourites.map(book => (
+              {favourites.map(bookId => (
                <Link
-  key={book._id}
-  to={`/read/${book._id}`}
+  key={bookId._id}
+  to={`/read/${bookId._id}`}
   className="px-4 py-2 rounded-lg bg-blue-900 w-[90%] sm:w-[300px] text-white hover:bg-cyan-600 transition-all shadow-md text-left"
 >
-  {book.title}
+  {bookId.title}
 </Link>
               ))}
             </div>
