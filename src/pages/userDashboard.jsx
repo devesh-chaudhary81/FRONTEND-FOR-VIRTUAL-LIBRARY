@@ -193,7 +193,7 @@ const UserDashboard = () => {
             <div className="space-y-4">
               {feedbacks.length > 0 ? feedbacks.map(fb => (
                 <div key={fb._id} className="p-4 bg-gradient-to-br from-blue-100 to-blue-300 rounded-xl border shadow hover:shadow-blue-300 transition-all duration-300">
-                  <p className="font-semibold text-blue-900">{fb.fullName}</p>
+                  {/* <p className="font-semibold text-blue-900">{fb.fullName}</p> */}
                   <p className="text-[#1e3a5f]">{fb.message}</p>
                   <small className="text-gray-500">{new Date(fb.createdAt).toLocaleString()}</small>
                 </div>

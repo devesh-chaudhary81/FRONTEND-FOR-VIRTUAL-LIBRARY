@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
@@ -12,26 +13,26 @@ const ForgotPassword = () => {
   const sendOTP = async () => {
     try {
       const res = await axios.post('https://api-routes.onrender.com/api/otp/send-otp', { email });
-      alert(res.data.message);
+      toast.success(res.data.message);
       setOtpSent(true);
     } catch (err) {
-      alert(err.response?.data?.message || 'Failed to send OTP');
+      toast.error(err.response?.data?.message || 'Failed to send OTP');
     }
   };
 
   const verifyOTP = async () => {
     try {
       const res = await axios.post('https://api-routes.onrender.com/api/otp/verify-otp', { email, otp });
-      alert(res.data.message);
+      toast.success(res.data.message);
       setOtpVerified(true);
     } catch (err) {
-      alert(err.response?.data?.message || 'OTP Verification failed');
+      toast.error(err.response?.data?.message || 'OTP Verification failed');
     }
   };
 
   const resetPassword = async () => {
     if (newPassword !== confirmPassword) {
-      alert('Passwords do not match');
+      toast.error('Passwords do not match');
       return;
     }
     try {
@@ -39,9 +40,9 @@ const ForgotPassword = () => {
         email,
         newPassword,
       });
-      alert(res.data.message);
+      toast.success(res.data.message);
     } catch (err) {
-      alert(err.response?.data?.message || 'Password reset failed');
+      toast.error(err.response?.data?.message || 'Password reset failed');
     }
   };
 
