@@ -5,6 +5,8 @@ import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import {toast} from 'react-toastify';
+import Footer from '../components/footer'
+import Navbar from '../components/sidebar'
 
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
@@ -95,7 +97,8 @@ const ReadBook = () => {
 
   return (
     <div className="flex flex-col md:flex-row h-screen">
-      <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden">
+      <div><Navbar/></div>
+      <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden mt-14">
         {bookURL ? (
           <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
             <div className="h-full overflow-hidden">
@@ -112,7 +115,7 @@ const ReadBook = () => {
       </div>
 
       {/* Summary Sidebar */}
-      <div className="w-full lg:w-1/4 bg-black text-white p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
+      <div className="w-full lg:w-1/3 bg-black text-white p-4 rounded shadow-md h-[100vh] overflow-y-auto sticky top-6 mt-14">
         <h2 className="text-lg font-semibold mb-2">🧠 Prepare your notes...</h2>
 
         <div className="flex flex-col gap-2 mb-4">
@@ -176,9 +179,12 @@ const ReadBook = () => {
             </div>
           </div>
         )}
+       
       </div>
     </div>
+    
   );
+
 };
 
 export default ReadBook;

@@ -20,6 +20,7 @@ import religion from "../assets/religion-spirituality.jpg";
 import science from "../assets/science-technology.png";
 import selfHelp from "../assets/selfhelp-lifestyle.jpg";
 import govtExam from "../assets/government-exam.jpg";
+import Footer from "../components/footer";
 
 const categories = [
   { title: "Coding and Computer Science", img: coding, link: "/coding-cse" },
@@ -86,7 +87,9 @@ const Categories = () => {
         </div>
       </main>
     </div>
+    <Footer/>
   </div>
+  
 );
 
 };

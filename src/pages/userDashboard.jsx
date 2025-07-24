@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { toast } from 'react-toastify';
 import Navbar from '../components/sidebar';
 import { Link } from 'react-router-dom';
+import  Footer from '../components/footer'
 import {
   PieChart,
   Pie,

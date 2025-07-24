@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="backdrop-blur-sm mt-12 relative font-poppins text-black">
+    <footer className="bg-[#7A9CB3] backdrop-blur-sm mt-12 relative font-poppins text-black">
       {/* Footer Main Content */}
       <div className="relative z-20 max-w-6xl mx-auto px-6 py-16 flex flex-wrap gap-10 justify-between">
 

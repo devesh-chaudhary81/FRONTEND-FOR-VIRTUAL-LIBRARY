@@ -39,7 +39,7 @@ const Home = () => {
       </div>
 
       {/* Main Content Layer */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-sans text-gray-800 min-h-screen">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-sans text-gray-800 min-h-screen mb-32">
         <Navbar />
 
         {/* Hero Section aligned right */}
@@ -186,7 +186,7 @@ const Home = () => {
        
       </div>
 
-      <Footer />
+      <Footer className="mt-48"/>
     </>
   );
 };

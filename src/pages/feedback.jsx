@@ -162,6 +162,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import Sidebar from '../components/sidebar';
+import Footer from '../components/footer';
 
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
@@ -210,12 +211,12 @@ const FeedbackForm = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gradient-to-br from-blue-950 to-black text-white">
+    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-950 to-black text-white">
       <Sidebar />
       <div className="flex flex-1 items-start justify-center px-4 sm:px-8 py-10 md:py-16">
-        <div className="w-full max-w-4xl bg-blue-950/40 border border-blue-700 rounded-2xl p-8 md:p-10 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-lg">
+        <div className="w-full mt-4 max-w-4xl bg-blue-950/40 border border-blue-700 rounded-2xl p-8 md:p-10 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-lg">
           
-          <div className="text-center mb-6 md:mb-8">
+          <div className="text-center mb-6 md:mb-8 ">
             <h1 className="text-blue-400 text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-md">
               Share Your Feedback ✨
             </h1>
@@ -316,6 +317,9 @@ const FeedbackForm = () => {
             </button>
           </form>
         </div>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );
