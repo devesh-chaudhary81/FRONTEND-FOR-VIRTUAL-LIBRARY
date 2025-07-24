@@ -164,21 +164,21 @@ const Navbar = () => {
         </h2>
 
         {/* Search Bar */}
-        {/* <form
+        <form
           onSubmit={handleSearch}
-          className="hidden lg:flex items-center bg-white rounded-full px-3 bg-[#FAF7F3] py-1 w-64 shadow-md"
+          className="hidden lg:flex w-[30%] items-center h-[25px]  rounded-full px-3 bg-[#FAF7F3] py-1 w-64 shadow-md"
         >
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="flex-grow text-gray-700 px-3 py-1 rounded-l-full bg-[#FAF7F3] outline-none text-sm"
+            className="flex-grow text-gray-700 px-3 py-1 rounded-l-full bg-[#FAF7F3] h-[25px] outline-none text-sm"
             placeholder="Search books..."
           />
           <button type="submit" className="text-[#5B88C4] hover:text-blue-600 transition p-1">
             <FaSearch size={16} />
           </button>
-        </form> */}
+        </form>
 
         {/* Desktop Menu */}
         <div className="flex items-center gap-6">
