@@ -118,12 +118,14 @@ import axios from 'axios';
 import bgImg from '../assets/signup-bg.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Navbar from '../components/sidebar';
 
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false); // ✅ loading state
+
 
   useEffect(() => {
     const isLoggedIn = localStorage.getItem('userToken');
@@ -165,6 +167,7 @@ const Login = () => {
       />
 
       <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10"></div>
+      <div><Navbar/></div>
 
       <div className="relative z-20 w-[90%] max-w-md bg-black/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 text-white">
         <h2 className="text-3xl font-bold text-center mb-2 text-white drop-shadow-md">

@@ -141,6 +141,8 @@ import bgImg from '../assets/signup-bg.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import Navbar from '../components/sidebar';
+import Footer from "../components/footer";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -201,6 +203,7 @@ const Signup = () => {
         className="absolute w-[110%] h-[110%] object-cover filter blur-[2px] brightness-[0.85] contrast-[1.1] saturate-[1.2] z-0"
       />
       <div className="absolute top-0 left-0 w-full h-full bg-black/60 z-10" />
+      <div><Navbar/></div>
 
       <div className="relative z-20 flex flex-col items-center justify-center w-full h-full">
         <div className="w-[90%] max-w-md bg-black/80 backdrop-blur-lg rounded-3xl shadow-2xl p-8 text-white">
@@ -246,7 +249,9 @@ const Signup = () => {
             </p>
           </div>
         </div>
+        
       </div>
+      <div><Footer/></div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Navbar from "../components/sidebar"
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
@@ -47,9 +48,12 @@ const ForgotPassword = () => {
   };
 
   return (
+  
     <div className="mt-10 p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4" style={{ boxShadow: "0 0 10px 2px rgba(0, 0, 0, 0.5)" }}>
-      <div className="flex justify-between items-center">
-  <h2 className="text-xl font-bold">Forgot Password</h2>
+
+      <div className="flex justify-between items-center ">
+    
+  <h2 className="text-xl font-bold ">Forgot Password</h2>
   <Link to="/login"><button className="text-white hover:underline bg-blue-500 w-16"style={{ borderRadius: '3px' }}>Login</button></Link>
 </div>
 

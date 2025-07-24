@@ -138,11 +138,16 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaBars, FaTimes, FaSearch } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
+const location = useLocation();
+const hideSearchBarRoutes = ['/', '/home', '/login', '/signup', '/forgot password'];
+const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
+
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
@@ -164,7 +169,8 @@ const Navbar = () => {
         </h2>
 
         {/* Search Bar */}
-        <form
+        {!shouldHideSearchBar && (
+          <form
           onSubmit={handleSearch}
           className="hidden lg:flex w-[30%] items-center h-[25px]  rounded-full px-3 bg-[#FAF7F3] py-1 w-64 shadow-md"
         >
@@ -179,6 +185,8 @@ const Navbar = () => {
             <FaSearch size={16} />
           </button>
         </form>
+        )}
+        
 
         {/* Desktop Menu */}
         <div className="flex items-center gap-6">
