@@ -43,7 +43,7 @@ const categories = [
 
 const Categories = () => {
   return (
-  <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e3a8a] to-[#0c4a6e] text-white">
+  <div className="min-h-screen bg-[#7A9CB3]/70 text-white">
     <Navbar />
 
     <div className="pt-16 lg:flex">
@@ -54,11 +54,11 @@ const Categories = () => {
         <div className="text-center mb-10">
           <div className="flex justify-center items-center gap-3 mb-2">
             <BookOpen size={36} className="text-yellow-400 drop-shadow-lg" />
-            <h1 className="text-4xl md:text-5xl font-bold font-sans drop-shadow-md">
+            <h1 className="text-4xl md:text-5xl text-gray-900 font-bold font-sans drop-shadow-md">
               Choose Your Category
             </h1>
           </div>
-          <p className="text-blue-200 text-sm">
+          <p className="text-black text-sm">
             Explore your favorite topics from our library
           </p>
         </div>

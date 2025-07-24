@@ -211,22 +211,22 @@ const FeedbackForm = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-br from-blue-950 to-black text-white">
+    <div className="flex flex-col min-h-screen bg-[#7A9CB3]/70 text-white">
       <Sidebar />
       <div className="flex flex-1 items-start justify-center px-4 sm:px-8 py-10 md:py-16">
-        <div className="w-full mt-4 max-w-4xl bg-blue-950/40 border border-blue-700 rounded-2xl p-8 md:p-10 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-lg">
+        <div className="w-full mt-4 max-w-4xl bg-[#7A9CB3]/70  border-blue-700 rounded-2xl p-8 md:p-10 shadow-[0_0_30px_rgba(0,0,0,0.7)] backdrop-blur-lg">
           
-          <div className="text-center mb-6 md:mb-8 ">
-            <h1 className="text-blue-400 text-4xl md:text-5xl font-extrabold tracking-tight drop-shadow-md">
+          <div className="text-center mb-6 md:mb-8 bg-[ffffff]">
+            <h1 className="text-gray-900 text-4xl md:text-5xl font-extrabold tracking-tight">
               Share Your Feedback ✨
             </h1>
-            <p className="mt-2 text-blue-100 text-base md:text-lg">
+            <p className="mt-2 text-white font-semibold md:text-lg">
               We value your thoughts! Let us know what you love, what could be better, or any features you'd like to see in Antarix.
             </p>
           </div>
 
           {submitted && (
-            <p className="text-green-400 text-center mb-4 font-semibold">
+            <p className="text-green-900 text-center mb-4 font-semibold">
               Thank you for your feedback!
             </p>
           )}
@@ -234,7 +234,7 @@ const FeedbackForm = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="fullName" className="block text-sm font-semibold text-blue-200 mb-1">
+                <label htmlFor="fullName" className="block text-sm font-semibold text-black mb-1">
                   Full Name
                 </label>
                 <input
@@ -243,13 +243,13 @@ const FeedbackForm = () => {
                   value={formData.fullName}
                   onChange={handleChange}
                   placeholder="John Doe"
-                  className="w-full h-11 rounded-lg bg-blue-100/10 border border-blue-700 text-white placeholder-blue-300 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full h-11 rounded-lg bg-[#FAF7F3] border border-blue-700 text-black placeholder-black px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-semibold text-blue-200 mb-1">
+                <label htmlFor="email" className="block text-sm font-semibold text-black mb-1">
                   Email
                 </label>
                 <input
@@ -258,13 +258,13 @@ const FeedbackForm = () => {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="john@example.com"
-                  className="w-full h-11 rounded-lg bg-blue-100/10 border border-blue-700 text-white placeholder-blue-300 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full h-11 rounded-lg bg-[#FAF7F3] border border-blue-700 text-black placeholder-black px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="age" className="block text-sm font-semibold text-blue-200 mb-1">
+                <label htmlFor="age" className="block text-sm font-semibold text-black mb-1">
                   Age
                 </label>
                 <input
@@ -273,14 +273,14 @@ const FeedbackForm = () => {
                   value={formData.age}
                   onChange={handleChange}
                   placeholder="Your age"
-                  className="w-full h-11 rounded-lg bg-blue-100/10 border border-blue-700 text-white placeholder-blue-300 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full h-11 rounded-lg bg-[#FAF7F3] border border-blue-700 text-black placeholder-black px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   min="1"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="city" className="block text-sm font-semibold text-blue-200 mb-1">
+                <label htmlFor="city" className="block text-sm font-semibold text-black mb-1">
                   City
                 </label>
                 <input
@@ -289,14 +289,14 @@ const FeedbackForm = () => {
                   value={formData.city}
                   onChange={handleChange}
                   placeholder="Your city"
-                  className="w-full h-11 rounded-lg bg-blue-100/10 border border-blue-700 text-white placeholder-blue-300 px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                  className="w-full h-11 rounded-lg bg-[#FAF7F3] border border-blue-700 text-black placeholder-black px-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-semibold text-blue-200 mb-1">
+              <label htmlFor="message" className="block text-sm font-semibold text-black mb-1">
                 Message
               </label>
               <textarea
@@ -304,7 +304,7 @@ const FeedbackForm = () => {
                 value={formData.message}
                 onChange={handleChange}
                 placeholder="Write your message here..."
-                className="w-full h-36 rounded-lg bg-blue-100/10 border border-blue-700 text-white placeholder-blue-300 px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
+                className="w-full h-36 rounded-lg bg-[#FAF7F3] border border-blue-700 text-black placeholder-black px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
                 required
               />
             </div>
@@ -318,9 +318,9 @@ const FeedbackForm = () => {
           </form>
         </div>
       </div>
-      <div>
+      
         <Footer/>
-      </div>
+      
     </div>
   );
 };

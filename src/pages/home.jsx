@@ -35,7 +35,7 @@ const Home = () => {
       <div className="fixed top-0 left-0 w-full h-screen z-0"
       style={{ backgroundImage: `url(${bgImage})` }}>
         
-        <div className="absolute inset-0 bg-[#7A9CB3]/10 backdrop-blur-sm z-0" />
+        <div className="absolute inset-0 bg-[#7A9CB3]/60 backdrop-blur-sm z-0" />
       </div>
 
       {/* Main Content Layer */}

@@ -165,7 +165,9 @@ const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <h2 className="text-3xl font-extrabold tracking-wide text-white font-serif whitespace-nowrap">
-          <span className="text-white">Antarix</span>
+          <span className="text-4xl sm:text-4xl font-extrabold text-gray-900 drop-shadow-md tracking-tight">Antari</span>
+          <span className="text-4xl sm:text-4xl font-extrabold text-indigo-900 drop-shadow-md tracking-tight">x</span>
+          
         </h2>
 
         {/* Search Bar */}
@@ -190,7 +192,7 @@ const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
 
         {/* Desktop Menu */}
         <div className="flex items-center gap-6">
-          <ul className="hidden lg:flex gap-8 items-center text-white font-serif font-semibold text-[17px]">
+          <ul className="hidden lg:flex gap-8 items-center text-white font-sans font-semibold text-[17px]">
             <li>
               <Link to="/" className="flex items-center gap-1 hover:text-blue-200 transition">
                 🏠 Home

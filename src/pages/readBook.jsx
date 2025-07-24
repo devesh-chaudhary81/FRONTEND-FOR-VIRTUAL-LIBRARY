@@ -80,7 +80,7 @@ const ReadBook = () => {
     setIsGenerating(true); // Start loader
 
     try {
-      const res = await axios.post("https://api-routes.onrender.com/api/books/summary-by-range", {
+      const res = await axios.post("http://localhost:3000/api/books/summary-by-range", {
         pdfUrl: bookURL,
         startPage: start,
         endPage: end,
@@ -115,8 +115,8 @@ const ReadBook = () => {
       </div>
 
       {/* Summary Sidebar */}
-      <div className="w-full lg:w-1/3 bg-black text-white p-4 rounded shadow-md h-[100vh] overflow-y-auto sticky top-6 mt-14">
-        <h2 className="text-lg font-semibold mb-2">🧠 Prepare your notes...</h2>
+      <div className="w-full lg:w-1/3 bg-blue-200 text-white p-4 rounded shadow-md h-[100vh] overflow-y-auto sticky top-6 mt-14">
+        <h2 className="text-lg font-semibold mb-2 text-black">🧠 Attemp Quiz...</h2>
 
         <div className="flex flex-col gap-2 mb-4">
           <input
@@ -164,7 +164,7 @@ const ReadBook = () => {
                 Generating...
               </>
             ) : (
-              "Generate Notes"
+              "Generate Quiz"
             )}
           </button>
         </div>
@@ -172,7 +172,7 @@ const ReadBook = () => {
         {summary && (
           <div className="mt-6 w-full bg-white text-black p-4 rounded shadow-md">
             <h2 className="text-lg font-semibold mb-2">
-              🧠 Here are Your Notes (Pages {startPage}–{endPage})
+              🧠 Here is your Quiz (Pages {startPage}–{endPage})
             </h2>
             <div className="prose max-w-none">
               <ReactMarkdown>{summary}</ReactMarkdown>
@@ -189,8 +189,12 @@ const ReadBook = () => {
 
 export default ReadBook;
 
+// Updated ReadBook.jsx and Backend Quiz Endpoint Integration
 
+// ✅ FIXED: Backend now returns parsed quiz as array
+// ✅ FIXED: Frontend now safely waits for currentUser before calling /open
 
+// ---- FRONTEND (React Component) ----
 
 // import React, { useEffect, useState } from "react";
 // import { useParams } from "react-router-dom";
@@ -198,6 +202,9 @@ export default ReadBook;
 // import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 // import axios from "axios";
 // import ReactMarkdown from "react-markdown";
+// import { toast } from "react-toastify";
+// import Footer from "../components/footer";
+// import Navbar from "../components/sidebar";
 
 // import "@react-pdf-viewer/core/lib/styles/index.css";
 // import "@react-pdf-viewer/default-layout/lib/styles/index.css";
@@ -208,124 +215,219 @@ export default ReadBook;
 //   const [summary, setSummary] = useState("");
 //   const [currentPage, setCurrentPage] = useState(1);
 //   const [jumpToPageFn, setJumpToPageFn] = useState(null);
-//    const [inputPage, setInputPage] = useState("");
-//     const [totalPages, setTotalPages] = useState(null);
+//   const [totalPages, setTotalPages] = useState(null);
+//   const [startPage, setStartPage] = useState("");
+//   const [endPage, setEndPage] = useState("");
+//   const [isGenerating, setIsGenerating] = useState(false);
+//   const [currentUser, setCurrentUser] = useState(null);
+
+//   useEffect(() => {
+//     const storedUser = localStorage.getItem("user");
+//     if (storedUser) {
+//       try {
+//         setCurrentUser(JSON.parse(storedUser));
+//       } catch (err) {
+//         console.error("Failed to parse user from localStorage");
+//       }
+//     }
+//   }, []);
 
 //   const defaultLayoutPluginInstance = defaultLayoutPlugin({
 //     onPageChange: (e) => {
 //       const newPage = e.currentPage + 1;
 //       setCurrentPage(newPage);
-//       localStorage.setItem(`lastPage-${id}`, newPage); // 🧠 Save page
+//       localStorage.setItem(`lastPage-${id}`, newPage);
 //     },
 //     setJumpToPage: (fn) => setJumpToPageFn(() => fn),
 //   });
 
-//   // 1️⃣ Fetch book and content URL
 //   useEffect(() => {
 //     const fetchBook = async () => {
 //       try {
-//         const res = await axios.get(
-//           `https://api-routes.onrender.com/api/books/${id}`
-//         );
+//         const res = await axios.get(`http://localhost:3000/api/books/${id}`);
 //         const cloudinaryURL = res.data.contentURL;
 //         setBookURL(cloudinaryURL);
 
-//         await axios.post("http://localhost:3000/api/books/open", {
-//           url: cloudinaryURL,
-//           bookId: id,
-//         });
+//         if (currentUser?._id) {
+//           await axios.post("http://localhost:3000/api/books/open", {
+//             bookId: id,
+//             userId: currentUser._id,
+//           });
+//         }
 //       } catch (err) {
 //         console.error("Error fetching book:", err);
 //       }
 //     };
-//     fetchBook();
-//   }, [id]);
+//     if (currentUser) fetchBook();
+//   }, [id, currentUser]);
 
-//   // 2️⃣ Resume last page once Viewer is ready
 //   useEffect(() => {
 //     if (!bookURL || !jumpToPageFn) return;
 
 //     const savedPage = localStorage.getItem(`lastPage-${id}`);
 //     if (savedPage) {
-//       console.log("jump successfull");
-//       jumpToPageFn(Number(savedPage) - 1); // PDF pages are 0-indexed
+//       jumpToPageFn(Number(savedPage) - 1);
 //       setCurrentPage(Number(savedPage));
 //     }
 //   }, [bookURL, jumpToPageFn, id]);
 
-//   // 3️⃣ Get summary on button click
-//  const handleGenerateSummary = async () => {
-//     if (!inputPage || isNaN(inputPage) || inputPage < 1 || inputPage > totalPages) {
-//       alert("Please enter a valid page number.");
-//       return;
+//   const handleGenerateQuizOrSummary = async () => {
+//     const start = Number(startPage);
+//     const end = Number(endPage);
+
+//     if (
+//       isNaN(start) ||
+//       isNaN(end) ||
+//       start < 1 ||
+//       end < 1 ||
+//       start > totalPages ||
+//       end > totalPages ||
+//       end < start ||
+//       end - start > 20
+//     ) {
+//       toast.warn("Please enter a valid page range (Max: 20 pages)")
+//         return;
+  
 //     }
 
+//     setIsGenerating(true);
+
 //     try {
-//       const res = await axios.post("http://localhost:3000/api/books/summary-by-page", {
-//         pdfUrl: bookURL,
-//         pageNumber: Number(inputPage),
-//       });
-//       setSummary(res.data.summary);
+//       const response = await axios.post(
+//         "http://localhost:3000/api/books/quiz-by-range",
+//         {
+//           pdfUrl: bookURL,
+//           startPage: start,
+//           endPage: end,
+//           type: "quiz",
+//         }
+//       );
+
+//       const rawQuiz = response.data.quiz;
+
+//       let quizData;
+// if (typeof rawQuiz === "string") {
+//   try {
+//     quizData = JSON.parse(rawQuiz);
+//   } catch (e) {
+//     setSummary("⚠️ Quiz format invalid.");
+//     return;
+//   }
+// } else if (Array.isArray(rawQuiz)) {
+//   quizData = rawQuiz;
+// } else {
+//   setSummary("⚠️ Quiz format invalid.");
+//   return;
+// }
+
+//       if (Array.isArray(quizData)) {
+//         const formatted = quizData
+//           .map((q, index) => {
+//             const options = q.options
+//               ?.map((opt, i) => `${String.fromCharCode(65 + i)}. ${opt}`)
+//               .join("\n");
+//             return `**Q${index + 1}.** ${q.question}\n${options}\n\n**Answer:** ${q.answer}`;
+//           })
+//           .join("\n\n");
+//         setSummary(formatted);
+//       } else {
+//         setSummary("⚠️ Quiz format invalid.");
+//       }
 //     } catch (err) {
-//       console.error("Error generating summary:", err);
+//       console.error("Error generating quiz:", err);
+//       setSummary("❌ Failed to generate quiz.");
+//     } finally {
+//       setIsGenerating(false);
 //     }
 //   };
 
-//   if (!bookURL) return <p className="text-center mt-10 text-white">🔄 Loading book...</p>;
+//   if (!bookURL)
+//     return <p className="text-center mt-10 text-white">🔄 Loading book...</p>;
 
 //   return (
 //     <div className="flex flex-col md:flex-row h-screen">
-//       <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden">
-//         {bookURL ? (
-//           <Worker
-//             workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}
+//       <div>
+//         <Navbar />
+//       </div>
+//       <div className="w-full md:w-2/3 h-full border-r border-gray-200 overflow-hidden mt-14">
+//         <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+//           <div className="h-full overflow-hidden">
+//             <Viewer
+//               fileUrl={bookURL}
+//               plugins={[defaultLayoutPluginInstance]}
+//               onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
+//             />
+//           </div>
+//         </Worker>
+//       </div>
+
+//       {/* Summary Sidebar */}
+//       <div className="w-full lg:w-1/3 bg-blue-200 text-white p-4 rounded shadow-md h-[100vh] overflow-y-auto sticky top-6 mt-14">
+//         <h2 className="text-lg font-semibold mb-2 text-black">🧠 Attempt Quiz...</h2>
+
+//         <div className="flex flex-col gap-2 mb-4">
+//           <input
+//             type="number"
+//             value={startPage}
+//             onChange={(e) => setStartPage(e.target.value)}
+//             className="border border-gray-300 p-2 text-black rounded w-full"
+//             placeholder="Start Page"
+//             min={1}
+//             max={totalPages}
+//           />
+//           <input
+//             type="number"
+//             value={endPage}
+//             onChange={(e) => setEndPage(e.target.value)}
+//             className="border border-gray-300 p-2 text-black rounded w-full"
+//             placeholder="End Page"
+//             min={1}
+//             max={totalPages}
+//           />
+//           <button
+//             onClick={handleGenerateQuizOrSummary}
+//             disabled={isGenerating}
+//             className={`flex items-center justify-center gap-2 bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700 transition ${
+//               isGenerating ? "opacity-70 cursor-not-allowed" : ""
+//             }`}
 //           >
-//             <div className="h-full overflow-hidden">
-//               <Viewer
-//                 fileUrl={bookURL}
-//                 plugins={[defaultLayoutPluginInstance]}
-//                  onDocumentLoad={(e) => setTotalPages(e.doc.numPages)}
-//               />
+//             {isGenerating ? (
+//               <>
+//                 <svg className="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none">
+//                   <circle
+//                     className="opacity-25"
+//                     cx="12"
+//                     cy="12"
+//                     r="10"
+//                     stroke="white"
+//                     strokeWidth="4"
+//                   />
+//                   <path
+//                     className="opacity-75"
+//                     fill="white"
+//                     d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+//                   />
+//                 </svg>
+//                 Generating...
+//               </>
+//             ) : (
+//               "Generate Quiz"
+//             )}
+//           </button>
+//         </div>
+
+//         {summary && (
+//           <div className="mt-6 w-full bg-white text-black p-4 rounded shadow-md">
+//             <h2 className="text-lg font-semibold mb-2">
+//               🧠 Here is your Quiz (Pages {startPage}–{endPage})
+//             </h2>
+//             <div className="prose max-w-none">
+//               <ReactMarkdown>{summary}</ReactMarkdown>
 //             </div>
-//           </Worker>
-//         ) : (
-//           <div className="text-center mt-10">Loading book...</div>
+//           </div>
 //         )}
 //       </div>
-
-//      <div className="w-full lg:w-1/4 bg-white text-black p-4 rounded shadow-md max-h-[80vh] overflow-y-auto sticky top-6">
-
-//           <h2 className="text-lg font-semibold mb-2">🧠 Generate Summary</h2>
-
-//           <div className="flex items-center mb-4 gap-2">
-//             <input
-//               type="number"
-//               value={inputPage}
-//               onChange={(e) => setInputPage(e.target.value)}
-//               className="border border-gray-300 p-2 rounded w-24"
-//               placeholder="Page #"
-//               min={1}
-//               max={totalPages}
-//             />
-//             <button
-//               onClick={handleGenerateSummary}
-//               className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700"
-//             >
-//               Generate
-//             </button>
-//           </div>
-
-//           {summary && (
-//   <div className="mt-6 w-full max-w-5xl bg-white text-black p-4 rounded shadow-md">
-//     <h2 className="text-lg font-semibold mb-2">🧠 Summary of Page {inputPage}</h2>
-//     <div className="prose max-w-none">
-//       <ReactMarkdown>{summary}</ReactMarkdown>
 //     </div>
-//   </div>
-// )}
-//         </div>
-//       </div>
-    
 //   );
 // };
 

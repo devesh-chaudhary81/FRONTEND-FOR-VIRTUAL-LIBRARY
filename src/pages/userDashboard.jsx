@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import Navbar from '../components/sidebar';
 import { Link } from 'react-router-dom';
 import  Footer from '../components/footer'
+import { FaTrashAlt } from 'react-icons/fa'; // 👈 Add this at top if not already imported
+
 import {
   PieChart,
   Pie,
@@ -70,6 +72,22 @@ const UserDashboard = () => {
     }
   };
 
+  const handleRemoveFromFavourites = async (bookIdToRemove) => {
+  try {
+    await axios.delete(`http://localhost:3000/api/users/favourites/${userId}/${bookIdToRemove}`);
+    
+    // ✅ Instantly update frontend
+    await fetchFavourites();
+    setFavourites(prev => prev.filter(book => book._id !== bookIdToRemove));
+
+    toast.success("Removed from favourites!");
+  } catch (error) {
+    console.error("Error removing from favourites:", error);
+    toast.error("Failed to remove from favourites");
+  }
+};
+
+
   const fetchMyShelf = async () => {
     try {
       const res = await axios.get(`https://api-routes.onrender.com/api/users/shelf/${userId}`);
@@ -78,6 +96,20 @@ const UserDashboard = () => {
       console.error('Shelf error:', error);
     }
   };
+
+  const handleRemoveFromShelf = async (bookId) => {
+  try {
+    await axios.delete(`http://localhost:3000/api/users/shelf/${userId}/${bookId}`);
+    // Update local shelf state
+    await fetchMyShelf();
+    setShelf(prev => prev.filter(({ bookId }) => bookId._id !== bookId));
+    toast.success("Book removed from shelf!");
+
+  } catch (error) {
+    console.error('Error removing from shelf:', error);
+    toast.error("Failed to remove book.");
+  }
+};
 
   const fetchFeedbacks = async () => {
     try {
@@ -152,40 +184,66 @@ const UserDashboard = () => {
           </motion.div>
         );
 
-      case 'favourites':
-        return (
-          <motion.div key="favourites" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h3 className="text-2xl md:text-3xl font-bold mb-6 text-blue-950 text-center">📘 Favourite Books</h3>
-            <div className="flex flex-wrap gap-4 justify-center">
-              {favourites.map(bookId => (
-               <Link
-  key={bookId._id}
-  to={`/read/${bookId._id}`}
-  className="px-4 py-2 rounded-lg bg-blue-900 w-[90%] sm:w-[300px] text-white hover:bg-cyan-600 transition-all shadow-md text-left"
->
-  {bookId.title}
-</Link>
-              ))}
-            </div>
-          </motion.div>
-        );
+     case 'favourites':
+  return (
+    <motion.div key="favourites" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <h3 className="text-2xl md:text-3xl font-bold mb-6 text-blue-950 text-center">📘 Favourite Books</h3>
+      <div className="flex flex-wrap gap-4 justify-center">
+        {favourites.map(book => (
+          <div
+            key={book._id}
+            className="relative px-4 py-2 rounded-lg bg-blue-900 w-[90%] sm:w-[300px] text-white hover:bg-cyan-600 transition-all shadow-md"
+          >
+            {/* 🗑️ Delete Icon */}
+            <button
+              onClick={() => handleRemoveFromFavourites(book._id)}
+              className="absolute top-2 right-2 text-red-400 hover:text-red-600"
+              title="Remove from favourites"
+            >
+              <FaTrashAlt size={16} />
+            </button>
 
-      case 'myshelf':
-        return (
-          <motion.div key="myshelf" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h3 className="text-2xl md:text-3xl font-bold text-[#0a1f44] mb-6 text-center">📚 MyShelf</h3>
-            <div className="flex flex-wrap gap-6 justify-center">
-              {shelf.map(({ bookId }) => (
-                <div key={bookId._id} className="w-[90%] sm:w-[300px] bg-[#b3d5f4] border-t-[6px] border-[#0a1f44] rounded-xl shadow-md p-4 flex flex-col items-center hover:scale-105 transition-transform">
-                  <h4 className="text-lg font-semibold text-[#0a1f44] mb-1">{bookId.title}</h4>
-                  <p className="text-sm text-[#1f3b56] mb-4">{bookId.author}</p>
-                  <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-contain mb-4" />
-                  <Link key={bookId._id} to={`/read/${bookId._id}`} className="text-sm text-[#0a1f44] font-medium hover:underline">▶️ Read Book</Link>
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        );
+            <Link to={`/read/${book._id}`} className="block text-left">
+              {book.title}
+            </Link>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+
+
+     case 'myshelf':
+  return (
+    <motion.div key="myshelf" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+      <h3 className="text-2xl md:text-3xl font-bold text-[#0a1f44] mb-6 text-center">📚 MyShelf</h3>
+      <div className="flex flex-wrap gap-6 justify-center">
+        {shelf.map(({ bookId }) => (
+          <div key={bookId._id} className="w-[90%] sm:w-[300px] bg-[#b3d5f4] border-t-[6px] border-[#0a1f44] rounded-xl shadow-md p-4 flex flex-col items-center hover:scale-105 transition-transform relative">
+            {/* 🗑️ Delete Icon in top-right */}
+            <button
+              onClick={() => handleRemoveFromShelf(bookId._id)}
+              className="absolute top-2 right-2 text-red-600 hover:text-red-800"
+              title="Remove from MyShelf"
+            >
+              <FaTrashAlt size={18} />
+            </button>
+
+            <h4 className="text-lg font-semibold text-[#0a1f44] mb-1">{bookId.title}</h4>
+            <p className="text-sm text-[#1f3b56] mb-4">{bookId.author}</p>
+            <img src={bookId.coverImageURL} alt={bookId.title} className="w-full h-40 object-contain mb-4" />
+            <Link
+              to={`/read/${bookId._id}`}
+              className="text-sm text-[#0a1f44] font-medium hover:underline"
+            >
+              ▶️ Read Book
+            </Link>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+
 
       case 'feedbacks':
         return (
@@ -228,14 +286,14 @@ const UserDashboard = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="w-full md:w-72 bg-blue-950 text-white px-6 py-8 shadow-xl border-b md:border-r border-blue-800">
+        <aside className="w-full md:w-72 bg-blue-950 text-white px-6 py-8 shadow-xl border-b md:border-r border-blue-800 min-h-screen">
           <h2 className="text-2xl md:text-3xl font-extrabold text-cyan-300">Antarix</h2>
           <p className="text-sm mb-6 text-cyan-100 italic">Welcome back, <span className="font-semibold text-cyan-200">{storedUser?.name}</span> 👋</p>
           <div className="flex flex-col gap-4">
             <button onClick={() => navigate('/')} className="bg-blue-800 hover:bg-blue-700 text-white px-4 py-2 rounded-xl">🏠 Home</button>
             <button onClick={() => setActiveTab('dashboard')} className={`${activeTab === 'dashboard' ? 'font-bold shadow-md shadow-cyan-300' : 'bg-blue-800 hover:bg-blue-700'} px-4 py-2 rounded-xl`}>📊 Dashboard</button>
-            <button onClick={() => { setActiveTab('favourites'); fetchFavourites(); }} className={`${activeTab === 'favourites' ? 'font-bold shadow-md shadow-cyan-300' : 'bg-blue-800 hover:bg-blue-700'} px-4 py-2 rounded-xl`}>❤️ Favourites</button>
-            <button onClick={() => { setActiveTab('myshelf'); fetchMyShelf(); }} className={`${activeTab === 'myshelf' ? 'font-bold shadow-md shadow-cyan-300' : 'bg-blue-800 hover:bg-blue-700'} px-4 py-2 rounded-xl`}>📘 MyShelf</button>
+            <button onClick={() => { setActiveTab('favourites'); fetchFavourites(); }} className={`${activeTab === 'favourites' ? 'font-bold shadow-md shadow-cyan-300' : 'bg-blue-800 hover:bg-blue-700'} px-4 h-[100%] py-2 rounded-xl`}>❤️ Favourites</button>
+            <button onClick={() => { setActiveTab('myshelf'); fetchMyShelf(); }} className={`${activeTab === 'myshelf' ? 'font-bold shadow-md shadow-cyan-300' : 'bg-blue-800 hover:bg-blue-700 '} px-4 py-2 rounded-xl`}>📘 MyShelf</button>
             <button onClick={() => { setActiveTab('feedbacks'); fetchFeedbacks(); }} className={`${activeTab === 'feedbacks' ? 'font-bold shadow-md shadow-cyan-300' : 'bg-blue-800 hover:bg-blue-700'} px-4 py-2 rounded-xl`}>📝 Feedbacks</button>
             <button onClick={() => navigate('/edit-profile')} className="bg-blue-800 hover:bg-blue-700 px-4 py-2 rounded-xl">⚙️ Edit Profile</button>
             <button onClick={handleLogout} className="bg-blue-800 hover:bg-red-600 px-4 py-2 rounded-xl mt-4">⏻ Logout</button>
