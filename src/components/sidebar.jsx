@@ -145,7 +145,7 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 const location = useLocation();
-const hideSearchBarRoutes = ['/', '/home', '/login', '/signup', '/forgot password'];
+const hideSearchBarRoutes = ['/', '/home', '/login', '/signup', '/forgot-password'];
 const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
 
 

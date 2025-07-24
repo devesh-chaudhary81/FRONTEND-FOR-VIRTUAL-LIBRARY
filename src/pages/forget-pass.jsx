@@ -49,8 +49,8 @@ const ForgotPassword = () => {
 
   return (
   
-    <div className="mt-10 p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4" style={{ boxShadow: "0 0 10px 2px rgba(0, 0, 0, 0.5)" }}>
-
+    <div className="mt-24 p-6 max-w-md mx-auto bg-white rounded-xl shadow-md space-y-4" style={{ boxShadow: "0 0 10px 2px rgba(0, 0, 0, 0.5)" }}>
+      <div><Navbar/></div>
       <div className="flex justify-between items-center ">
     
   <h2 className="text-xl font-bold ">Forgot Password</h2>
