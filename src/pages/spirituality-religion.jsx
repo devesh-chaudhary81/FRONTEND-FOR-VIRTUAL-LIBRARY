@@ -9,7 +9,7 @@ import granth from "../assets/granth.jpg";
 import vedas from "../assets/vedas.jpg";
 import chalisa from "../assets/chalisa.jpg";
 import philosophy from "../assets/philosophy.jpeg";
-
+import Navbar from '../components/sidebar';
 const categories = [
   { title: "Bhagavad Gita", image: gita },
   { title: "Ramayana & Mahabharata", image: ramayana },
@@ -29,7 +29,8 @@ const SpiritualityReligion = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-white px-4 py-10 font-['Poppins']">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mt-16 mb-10">
         <h1 className="text-3xl md:text-5xl font-bold text-amber-700 underline decoration-amber-400">
           Spirituality & Religion
         </h1>

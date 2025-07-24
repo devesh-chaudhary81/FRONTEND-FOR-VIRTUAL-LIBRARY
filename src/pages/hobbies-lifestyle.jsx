@@ -10,6 +10,7 @@ import interior from "../assets/interior.avif";
 import hacks from "../assets/hacks.jpeg";
 import journal from "../assets/journal.webp";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const hobbyCategories = [
   { title: "Cooking & Recipes", image: cooking },
   { title: "Gardening", image: gardening },
@@ -29,7 +30,8 @@ const HobbiesLifestyle = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-50 via-pink-50 to-green-50 px-4 py-10 font-['Poppins']">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mt-16 mb-10">
         <h1 className="text-3xl md:text-5xl font-bold text-green-700 underline decoration-green-400">
           DIY, Hobbies & Lifestyle
         </h1>

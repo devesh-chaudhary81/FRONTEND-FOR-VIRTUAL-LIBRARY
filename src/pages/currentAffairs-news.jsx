@@ -9,6 +9,7 @@ import sports from "../assets/sports.jpg";
 import opinions from "../assets/opinions.webp";
 import finance from "../assets/finance.jpg";
 import climate from "../assets/climate.jpg";
+import Navbar from '../components/sidebar';
 
 const newsCategories = [
   { title: "National News", image: news },
@@ -30,7 +31,8 @@ const CurrentAffairs = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-gray-100 px-4 py-10 font-['Poppins']">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mb-10 mt-16">
         <h1 className="text-3xl md:text-5xl font-bold text-blue-700 underline decoration-blue-400">
           Current Affairs & News
         </h1>

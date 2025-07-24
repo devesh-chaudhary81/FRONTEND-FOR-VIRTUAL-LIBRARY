@@ -10,6 +10,7 @@ import japanese from "../assets/japanese.jpg";
 import translation from "../assets/translation.jpg";
 import vocab from "../assets/vocab.jpeg";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const categories = [
   { title: "English Learning", image: english },
   { title: "Hindi Literature", image: hindi },
@@ -29,7 +30,8 @@ const LanguagesCulture = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-b from-indigo-900 via-purple-950 to-black px-4 py-8 font-['Poppins'] text-white">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mb-10 mt-16">
         <h1 className="text-3xl md:text-5xl font-semibold underline decoration-pink-400">
           Languages & Culture
         </h1>

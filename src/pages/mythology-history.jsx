@@ -9,6 +9,7 @@ import freedom from "../assets/freedom.webp";
 import war from "../assets/war.jpg";
 import cultural from "../assets/cultural.jpg";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const categories = [
   { title: "Indian Mythology", image: mythology },
   { title: "Greek & Roman Mythology", image: greek },
@@ -27,7 +28,8 @@ const MythologyHistory = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-b from-yellow-900 via-stone-900 to-black px-4 py-8 font-['Poppins'] text-white">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mb-10 mt-16">
         <h1 className="text-3xl md:text-5xl font-semibold underline decoration-orange-500">
           Mythology & History
         </h1>

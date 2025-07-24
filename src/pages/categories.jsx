@@ -50,6 +50,7 @@ const Categories = () => {
 
       {/* Main content */}
       <main className="flex-1 px-4 sm:px-8 md:px-12 py-8">
+       
         <div className="text-center mb-10">
           <div className="flex justify-center items-center gap-3 mb-2">
             <BookOpen size={36} className="text-yellow-400 drop-shadow-lg" />

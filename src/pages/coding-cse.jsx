@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 
 // Import all images from assets
 import webDev from "../assets/webdev.png";
@@ -35,7 +36,8 @@ const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-slate-950 to-black px-4 py-8 font-['Poppins'] text-white">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mb-10 mt-16">
         <h1 className="text-3xl md:text-5xl font-semibold underline decoration-cyan-400">
           Coding & Computer Science
         </h1>

@@ -3,6 +3,7 @@ import comic from '../assets/comic.jpg';
 import photography from '../assets/photography.jpeg';
 import meme from '../assets/meme1.jpg';
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const CreativeEntertainment = () => {
 
   const navigate = useNavigate();
@@ -18,7 +19,8 @@ const CreativeEntertainment = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] text-white font-['Poppins']">
-      <div className="pt-24 text-center">
+      <div><Navbar/></div>
+      <div className="pt-24 text-center mt-16">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white text-shadow-md drop-shadow-lg">
           Creative & Entertainment
         </h1>

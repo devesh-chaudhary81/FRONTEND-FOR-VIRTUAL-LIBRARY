@@ -7,6 +7,7 @@ import spirituality from "../assets/spirituality.webp";
 import growth from "../assets/growth.png";
 import health from "../assets/health.jpeg";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const categories = [
   { title: "Motivation & Habits", image: motivation },
   { title: "Time Management", image: time },
@@ -25,7 +26,8 @@ const SelfHelpLifestyle = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] font-['Poppins'] px-6 py-10">
-      <h1 className="text-white text-4xl md:text-5xl font-bold text-center mb-12 drop-shadow-[2px_2px_2px_white]">
+      <div><Navbar/></div>
+      <h1 className="text-white mt-16 text-4xl md:text-5xl font-bold text-center mb-12 drop-shadow-[2px_2px_2px_white]">
         Self-Help & Lifestyle
       </h1>
 

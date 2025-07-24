@@ -9,6 +9,7 @@ import cuet from '../assets/cuet.png';
 import tet from '../assets/tet.jpeg';
 import ugc from '../assets/ugc.jpeg';
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const GovernmentExamPrep = () => {
   const navigate = useNavigate();
   const handleCardClick = (subcategory) => {
@@ -29,7 +30,8 @@ const GovernmentExamPrep = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] text-white font-['Poppins']">
-      <div className="pt-24 text-center">
+      <div><Navbar/></div>
+      <div className="pt-24 text-center mt-16">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold text-white drop-shadow-lg">
           Government & Exam Preparation
         </h1>

@@ -7,6 +7,7 @@ import astroImg from "../assets/astro.png";
 import envSciImg from "../assets/envirnmental.png";
 import roboticsImg from "../assets/robotics.jpg";
 import ecoImg from "../assets/eco.jpeg";
+import Navbar from '../components/sidebar';
 
 const categories = [
   { title: "Physics", image: physicsImg },
@@ -26,7 +27,8 @@ const ScienceTechnology = () => {
 };
   return (
     <div className=" flex-col items-center min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] font-['Poppins'] px-6 py-10">
-      <h1 className="text-white text-4xl sm:text-5xl font-bold text-center mb-12 drop-shadow-md">
+      <div><Navbar/></div>
+      <h1 className="text-white mt-16 text-4xl sm:text-5xl font-bold text-center mb-12 drop-shadow-md">
         Science and Technology
       </h1>
 

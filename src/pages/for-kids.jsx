@@ -9,6 +9,7 @@ import poems from "../assets/poems.jpeg";
 import bedtime from "../assets/bedtime.png";
 import puzzle from "../assets/puzzle.jpg";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const kidsCategories = [
   { title: "Moral Stories", image: moral },
   { title: "Fairy Tales", image: fairy },
@@ -27,7 +28,8 @@ const ForKids = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-100 via-purple-100 to-yellow-100 px-4 py-10 font-['Poppins']">
-      <div className="text-center mb-10">
+      <div><Navbar/></div>
+      <div className="text-center mb-10 mt-16">
         <h1 className="text-3xl md:text-5xl font-bold text-pink-600 underline decoration-pink-400">
           For Kids
         </h1>

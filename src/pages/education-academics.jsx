@@ -8,6 +8,7 @@ import ecoImg from "../assets/eco.jpeg";
 import lawImg from "../assets/law.jpg";
 import envImg from "../assets/env.jpg";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const categories = [
   { title: "Mathematics", image: mathImg },
   { title: "Engineering", image: enggImg },
@@ -28,7 +29,8 @@ const EducationAcademics = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] font-[Poppins] px-4 py-8">
-      <h1 className="text-white text-center text-4xl md:text-5xl font-semibold mb-10 drop-shadow-lg">
+      <div><Navbar/></div>
+      <h1 className="text-white text-center text-4xl md:text-5xl font-semibold mb-10 drop-shadow-lg mt-16">
         Education & Academics
       </h1>
 

@@ -6,6 +6,7 @@ import nibandh from "../assets/nibandh.webp";
 import dharmik from "../assets/dharmik.jpg";
 import natak from "../assets/natak.jpg";
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const categories = [
   { title: "हिंदी कविता", image: kavita },
   { title: "हिंदी कहानियाँ", image: kahani },
@@ -23,7 +24,8 @@ const HindiSahitya = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] font-['Poppins'] px-6 py-10">
-      <h1 className="text-white text-5xl font-bold text-center mb-12 drop-shadow-[2px_2px_2px_white]">
+      <div><Navbar/></div>
+      <h1 className="text-white mt-16 text-5xl font-bold text-center mb-12 drop-shadow-[2px_2px_2px_white]">
         Hindi Sahitya
       </h1>
 

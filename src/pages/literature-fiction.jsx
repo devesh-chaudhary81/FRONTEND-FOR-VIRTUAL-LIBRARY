@@ -9,6 +9,7 @@ import horror from '../assets/horror.jpeg';
 import romance from '../assets/romance.jpg';
 import mystery from '../assets/mystry.avif';
 import { useNavigate } from "react-router-dom";
+import Navbar from '../components/sidebar';
 const categories = [
   { title: 'Classic Literature', image: classic },
   { title: 'Modern Literature', image: modern },
@@ -29,7 +30,8 @@ const LiteratureFiction = () => {
 };
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#01000d] via-[#08062f] to-[#0c053e] font-['Poppins'] flex flex-col items-center px-4 py-16">
-      <h1 className="text-white text-4xl md:text-5xl font-bold text-center mb-12 drop-shadow-[2px_2px_5px_rgba(255,255,255,0.3)]">
+      <div><Navbar/></div>
+      <h1 className="text-white mt-16 text-4xl md:text-5xl font-bold text-center mb-12 drop-shadow-[2px_2px_5px_rgba(255,255,255,0.3)]">
         Literature and Fiction
       </h1>
 
