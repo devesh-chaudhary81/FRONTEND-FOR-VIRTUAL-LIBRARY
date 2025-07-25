@@ -387,7 +387,7 @@ const [quizData, setQuizData] = useState([]);
   try {
     const route =
       type === "quiz"
-        ? "https://api-routes.onrender.com/books/quiz-by-range"
+        ? "https://api-routes.onrender.com/api/books/quiz-by-range"
         : "https://api-routes.onrender.com/api/books/Notes-by-range";
 
     const res = await axios.post(route, {
