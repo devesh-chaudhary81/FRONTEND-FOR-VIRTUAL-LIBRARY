@@ -24,7 +24,6 @@ import SelfHelpLifestyle from './pages/selfHelp-lifestyle';
 import SpiritualityReligion from './pages/spirituality-religion';
 import UserDashboard from './pages/userDashboard';
 import SearchResults from './pages/searchResult';
-import ForgotPassword from './pages/forget-pass';
 import ReadBook from './pages/readBook';
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -33,6 +32,7 @@ import Dashboard from './components/Dashboard';
 
 
 function App() {
+  const storedUserId = localStorage.getItem("userId");
   return (
     <BrowserRouter>
     <ToastContainer
@@ -76,8 +76,7 @@ function App() {
   <Route path="/selfHelp-lifestyle" element={<SelfHelpLifestyle />} />
   <Route path="/spirituality-religion" element={<SpiritualityReligion />} />
   <Route path="/search" element={<SearchResults />} />
-  <Route path="/forgot password" element={<ForgotPassword />} />
-  <Route path="/read/:id" element={<ReadBook />} />
+  <Route path="/read/:id" element={<ReadBook userId={storedUserId} />} />
   <Route path="/read" element={<ReadBook />} />
   <Route path="/userDashboard" element={<UserDashboard />} />
   <Route path="/edit-profile" element={<EditProfile />} />
