@@ -57,7 +57,7 @@ const UserDashboard = () => {
 
   const fetchFavourites = async () => {
   try {
-    const res = await axios.get(`http//api-routes.onrender.com/api/users/favourites/${userId}`);
+    const res = await axios.get(`https//api-routes.onrender.com/api/users/favourites/${userId}`);
     setFavourites(res.data);
   } catch (error) {
     console.error('❌ Favourites fetch error:', error?.response?.data || error.message);
