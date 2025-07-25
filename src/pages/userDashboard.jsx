@@ -442,7 +442,7 @@ const UserDashboard = () => {
 
   const handleRemoveFromFavourites = async (bookIdToRemove) => {
   try {
-    await axios.delete(`http://localhost:3000/api/users/favourites/${userId}/${bookIdToRemove}`);
+    await axios.delete(`https://api-routes.onrender.com/api/users/favourites/${userId}/${bookIdToRemove}`);
     
     // ✅ Instantly update frontend
     await fetchFavourites();
@@ -467,7 +467,7 @@ const UserDashboard = () => {
 
   const handleRemoveFromShelf = async (bookId) => {
   try {
-    await axios.delete(`http://localhost:3000/api/users/shelf/${userId}/${bookId}`);
+    await axios.delete(`https://api-routes.onrender.com/api/users/shelf/${userId}/${bookId}`);
     // Update local shelf state
     await fetchMyShelf();
     setShelf(prev => prev.filter(({ bookId }) => bookId._id !== bookId));

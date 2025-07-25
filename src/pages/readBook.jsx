@@ -78,7 +78,7 @@ const userId = JSON.parse(localStorage.getItem("user"))?._id;
  useEffect(() => {
   const fetchBook = async () => {
     try {
-      const res = await axios.get(`http://localhost:3000/api/books/${id}`);
+      const res = await axios.get(`https://api-routes.onrender.com/api/books/${id}`);
       const cloudinaryURL = res.data.contentURL;
       setBookURL(cloudinaryURL);
     } catch (err) {
@@ -112,7 +112,7 @@ const userId = JSON.parse(localStorage.getItem("user"))?._id;
     setIsGenerating(true); // Start loader
 
     try {
-      const res = await axios.post("http://localhost:3000/api/books/quiz-by-range", {
+      const res = await axios.post("https://api-routes.onrender.com/api/books/quiz-by-range", {
         pdfUrl: bookURL,
         startPage: start,
         endPage: end,
