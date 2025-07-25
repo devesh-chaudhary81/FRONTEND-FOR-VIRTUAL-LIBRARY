@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import { BookOpen, Star, Heart, Plus } from "lucide-react";
 import GenerateSummary from "../components/summary";
 import Navbar from "../components/sidebar";
+import StarRatings from 'react-star-ratings';
+
 
 const SearchResults = () => {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ const SearchResults = () => {
   const query = new URLSearchParams(location.search).get("q");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [ratings, setRatings] = useState({});
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -30,6 +33,26 @@ const SearchResults = () => {
 
     if (query) fetchResults();
   }, [query]);
+
+  const handleRating = async (bookId, newRating) => {
+    const userId = localStorage.getItem("userId");
+    try {
+      await axios.post(`https://api-routes.onrender.com/api/books/${bookId}/rate`, {
+        bookId,
+        userId,
+        rating: newRating,
+      });
+
+      // Update the ratings state
+      setRatings((prev) => ({
+        ...prev,
+        [bookId]: newRating,
+      }));
+    } catch (err) {
+      console.error("❌ Error saving rating:", err);
+    }
+  };
+
 
   const handleAddToShelf = async (bookId) => {
     const user = JSON.parse(localStorage.getItem("user"));
@@ -91,6 +114,17 @@ const SearchResults = () => {
               key={book._id}
               className="w-[300px] bg-blue-50 text-black rounded-2xl shadow-lg hover:shadow-blue-600 transform hover:scale-[1.03] transition-all duration-300"
             >
+            <div className="flex justify-center py-2">
+            <StarRatings
+              rating={ratings[book._id] || book.averageRating || 0}
+              starRatedColor="gold"
+              changeRating={(newRating) => handleRating(book._id, newRating)}
+              numberOfStars={5}
+              name="rating"
+              starDimension="20px"
+              starSpacing="3px"
+            />
+          </div>
               <img
                 src={book.coverImageURL}
                 alt={book.title}
@@ -120,6 +154,10 @@ const SearchResults = () => {
                   >
                     <Plus size={16} /> Add to MyShelf
                   </button>
+                  <p className="text-extrabold text-red-600 text-md">
+  ⭐ {book.averageRating ? book.averageRating.toFixed(1) : "No ratings yet"}
+</p>
+
                 </div>
               </div>
             </div>

@@ -160,36 +160,30 @@ useEffect(() => {
           <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">📊 Dashboard Overview</h1>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl p-4 shadow-lg w-full  flex justify-center">
-                <PieChart width={260} height={260}>
-                  <Pie data={booksData} cx="50%" cy="50%" outerRadius={70} dataKey="value" label={({ name }) => name}>
-                    {booksData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </div>
-              <div className="bg-white rounded-xl p-4 shadow-lg w-full flex justify-center">
-                <PieChart width={300} height={300}>
+              <div className="bg-white rounded-xl p-4 shadow-lg w-full flex flex-col items-center">
+                <span className='text-black text-extrabold'>Top 10 Books By reading Time(in minutes)</span>
+                <PieChart width={400} height={300}>
+                  
   <Pie
+  
     data={BookReadData}
-    cx="50%"
-    cy="60%"
+    cx="35%"
+    cy="35%"
     outerRadius={70}
     dataKey="value"
-    labelLine={false}
-    // label={({ name }) => name.length > 10 ? name.slice(0, 10) + "..." : name}
+    labelLine={true}
+    label="top 10 books by readingTime(in minutes)"
   >
+    
     {BookReadData.map((entry, index) => (
       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
     ))}
   </Pie>
   <Tooltip />
+  
   <Legend
     layout="vertical"
-    align="center"
+    align="left"
     verticalAlign="bottom"
     iconSize={10}
     wrapperStyle={{
@@ -202,6 +196,17 @@ useEffect(() => {
   />
 </PieChart>
 
+              </div>
+               <div className="bg-white rounded-xl p-4 shadow-lg w-full  flex justify-center">
+                <PieChart width={300} height={300}>
+                  <Pie data={booksData} cx="50%" cy="50%" outerRadius={70} dataKey="value" >
+                    {booksData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
               </div>
             </div>
 
@@ -332,7 +337,7 @@ useEffect(() => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100">
       <div className="flex flex-col md:flex-row h-full">
-        <aside className="w-full md:w-72 bg-blue-950 text-white px-6 py-8 h-[100vh] shadow-xl border-b md:border-r border-blue-800">
+        <aside className="w-full md:w-72 bg-blue-950 text-white px-6 py-8 min-h-screen shadow-xl border-b md:border-r border-blue-800">
           <h2 className="text-2xl md:text-3xl font-extrabold text-cyan-300">Antarix</h2>
           <p className="text-sm mb-6 text-cyan-100 italic">Welcome back, <span className="font-semibold text-cyan-200">{storedUser?.name}</span> 👋</p>
           <div className="flex flex-col gap-4">

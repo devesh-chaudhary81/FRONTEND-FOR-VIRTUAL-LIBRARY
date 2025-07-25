@@ -29,6 +29,7 @@ import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/edit-profile';
 import Dashboard from './components/Dashboard';
+import NotFound from './pages/NotFound'
 
 
 function App() {
@@ -80,6 +81,7 @@ function App() {
   <Route path="/read" element={<ReadBook />} />
   <Route path="/userDashboard" element={<UserDashboard />} />
   <Route path="/edit-profile" element={<EditProfile />} />
+   <Route path="*" element={<NotFound />} />
 </Routes>
     </BrowserRouter>
   );
