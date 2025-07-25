@@ -13,6 +13,8 @@ const hideSearchBarRoutes = ['/', '/home', '/login', '/signup'];
 const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
 
 
+const isLoggedIn = Boolean(localStorage.getItem('user'));
+
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
@@ -77,11 +79,21 @@ const shouldHideSearchBar = hideSearchBarRoutes.includes(location.pathname);
               Categories
               </Link>
             </li>
-            <li>
-              <Link to="/userDashboard" className="flex items-center gap-1 hover:text-blue-200 transition">
-                My Profile
-              </Link>
-            </li>
+             {isLoggedIn ? (
+              <li>
+                <Link to="/userDashboard" className="flex items-center gap-1 hover:text-blue-200 transition">
+                  My Profile
+                </Link>
+              </li>
+            ) : (
+              <li>
+                <Link to="/login" className="flex items-center gap-1 hover:text-blue-200 transition">
+                  Login
+                </Link>
+              </li>
+            )
+          }
+              
           </ul>
 
           {/* Hamburger */}

@@ -4,12 +4,22 @@ import Footer from "../components/footer";
 import Navbar from "../components/sidebar";
 import { Search } from "lucide-react";
 import bgImage from '../assets/bg-home.png';
+import { toast } from "react-toastify";
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   const handleSearch = (e) => {
+
+     const isLoggedIn = localStorage.getItem("user"); 
+
+  if (!isLoggedIn) {
+    navigate("/login");
+    toast.warn("Please login first!");
+    return ;
+    
+  }
     e.preventDefault();
     if (searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
