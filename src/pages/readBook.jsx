@@ -123,8 +123,8 @@ const [quizData, setQuizData] = useState([]);
   try {
     const route =
       type === "quiz"
-        ? "http://localhost:3000/api/books/quiz-by-topic"
-        : "http://localhost:3000/api/books/Notes-by-topic";
+        ? "https://api-routes.onrender.com/api/books/quiz-by-topic"
+        : "https://api-routes.onrender.com/api/books/Notes-by-topic";
 
     const res = await axios.post(route, {
       pdfUrl: bookURL,
