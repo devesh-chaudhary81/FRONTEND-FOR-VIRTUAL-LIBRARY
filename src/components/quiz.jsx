@@ -102,7 +102,7 @@ const QuizComponent = ({ quizData, onExit }) => {
         className="mt-6 w-full bg-red-500 text-white py-2 rounded"
         onClick={onExit}
       >
-        🔙 Back
+        🔙 Reset
       </button>
     </div>
   );
