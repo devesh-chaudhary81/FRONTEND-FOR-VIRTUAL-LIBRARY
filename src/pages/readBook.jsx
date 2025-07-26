@@ -123,8 +123,8 @@ const [quizData, setQuizData] = useState([]);
   try {
     const route =
       type === "quiz"
-        ? "https://api-routes.onrender.com/api/books/quiz-by-topic"
-        : "https://api-routes.onrender.com/api/books/Notes-by-topic";
+        ? "http://localhost:3000/api/books/quiz-by-topic"
+        : "http://localhost:3000/api/books/Notes-by-topic";
 
     const res = await axios.post(route, {
       pdfUrl: bookURL,
@@ -174,7 +174,7 @@ console.log(res);
 
   {/* Page Range Inputs */}
   <div className="flex flex-col gap-2 mb-4">
-  Topic
+  <h1 className="text-bold text-center">Enter Your Topic</h1>
     <input
       type="text"
       value={topic}
