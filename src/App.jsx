@@ -69,7 +69,7 @@ function App() {
     const updateTime = async () => {
       const minutes = Math.floor(activeTimeRef.current / 60);
       if (minutes > 0) {
-        await axios.post("http://localhost:3000/api/users/update-website-time", {
+        await axios.post("https://api-routes.onrender.com/api/users/update-website-time", {
           userId: user._id,
           minutesRead: minutes,
         });
