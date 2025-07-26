@@ -9,7 +9,7 @@ import Navbar from '../components/sidebar';
 import { Link } from 'react-router-dom';
 import  Footer from '../components/footer'
 import { FaTrashAlt } from 'react-icons/fa';
-
+import Last5DaysChart from '../components/TrackWebsiteTime';
 import {
   PieChart,
   Pie,
@@ -49,13 +49,13 @@ const UserDashboard = () => {
 
   const COLORS = ["#4F46E5", "#10B981", "#F59E0B", "#EF4444", "#6366F1"];
 
-  const recentActivity = [
-    { date: "July 18", action: "Read: 'Atomic Habits'" },
-    { date: "July 19", action: "Bookmarked: 'The Alchemist'" },
-    { date: "July 20", action: "Completed: 'Deep Work'" },
-    { date: "July 21", action: "Feedback: 'Loved the interface!'" },
-    { date: "July 22", action: "Read: 'Hooked'" },
-  ];
+  // const recentActivity = [
+  //   { date: "July 18", action: "Read: 'Atomic Habits'" },
+  //   { date: "July 19", action: "Bookmarked: 'The Alchemist'" },
+  //   { date: "July 20", action: "Completed: 'Deep Work'" },
+  //   { date: "July 21", action: "Feedback: 'Loved the interface!'" },
+  //   { date: "July 22", action: "Read: 'Hooked'" },
+  // ];
 
   const fetchFavourites = async () => {
   try {
@@ -157,66 +157,65 @@ useEffect(() => {
     switch (activeTab) {
       case 'dashboard':
         return (
-          <motion.div key="dashboard" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 mb-6 text-center">📊 Dashboard Overview</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl p-4 shadow-lg w-full flex flex-col items-center">
-                <span className='text-black text-extrabold'>Top 10 Books By reading Time(in minutes)</span>
-                <PieChart width={400} height={300}>
-                  
-  <Pie
-  
-    data={BookReadData}
-    cx="35%"
-    cy="35%"
-    outerRadius={70}
-    dataKey="value"
-    labelLine={true}
-    label="top 10 books by readingTime(in minutes)"
-  >
-    
-    {BookReadData.map((entry, index) => (
-      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-    ))}
-  </Pie>
-  <Tooltip />
-  
-  <Legend
-    layout="vertical"
-    align="left"
-    verticalAlign="bottom"
-    iconSize={10}
-    wrapperStyle={{
-      paddingTop: 10,
-      fontSize: 12,
-      lineHeight: '16px',
-      maxWidth: 180,
-      textAlign: "center"
-    }}
-  />
-</PieChart>
+          <motion.div
+  key="dashboard"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  exit={{ opacity: 0 }}
+  className="p-4"
+>
+           <h1 className="text-2xl md:text-3xl font-extrabold text-gray-800 mb-6 text-center">
+    📊 Dashboard Overview
+  </h1>
+             <div className="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-2xl p-6 shadow-xl flex flex-col items-center">
+      <span className="text-lg font-semibold text-indigo-800 mb-4 text-center">
+        Top 10 Books by Reading Time (in minutes)
+      </span>
 
-              </div>
-               <div className="bg-white rounded-xl p-4 shadow-lg w-full  flex justify-center">
-                <PieChart width={300} height={300}>
-                  <Pie data={booksData} cx="50%" cy="50%" outerRadius={70} dataKey="value" >
-                    {booksData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                  </Pie>
-                  <Tooltip />
-                  <Legend />
-                </PieChart>
-              </div>
-            </div>
+      <div className="w-full h-72 md:h-80">
+        <ResponsiveContainer>
+          <PieChart>
+            <Pie
+              data={BookReadData}
+              cx="50%"
+              cy="50%"
+              outerRadius="80%"
+              dataKey="value"
+              label={({ name, value }) => `${name}: ${value}m`}
+            >
+              {BookReadData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                  stroke="#fff"
+                  strokeWidth={2}
+                />
+              ))}
+            </Pie>
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "#fff",
+                borderRadius: "10px",
+                padding: "8px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+              }}
+            />
+            <Legend
+              layout="horizontal"
+              align="center"
+              verticalAlign="bottom"
+              iconSize={12}
+              wrapperStyle={{ fontSize: "12px", paddingTop: "10px" }}
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+    </div>
+    
 
             <div className="bg-white p-4 md:p-6 rounded-xl shadow-lg mt-6 md:mt-8">
-              <h2 className="text-lg md:text-xl font-semibold mb-4">📅 Last 5 Days Activity</h2>
-              <ul className="list-disc ml-6 space-y-2 text-gray-700 text-sm md:text-base">
-                {recentActivity.map((item, idx) => (
-                  <li key={idx}><strong>{item.date}</strong>: {item.action}</li>
-                ))}
-              </ul>
+              <Last5DaysChart userId={userId} />
+
             </div>
 
             <div className="bg-white p-4 md:p-6 rounded-xl shadow-lg mt-6 md:mt-8">

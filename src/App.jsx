@@ -30,10 +30,67 @@ import 'react-toastify/dist/ReactToastify.css';
 import EditProfile from './pages/edit-profile';
 import Dashboard from './components/Dashboard';
 import NotFound from './pages/NotFound'
-
+import { useRef,useEffect ,useState} from 'react';
+import axios from 'axios';
 
 function App() {
   const storedUserId = localStorage.getItem("userId");
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const activeTimeRef = useRef(0); // total active seconds
+  const [isActive, setIsActive] = useState(true);
+  const idleTimer = useRef(null);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    if (!user?._id) return;
+
+    // Track activity and mark active
+    const resetIdle = () => {
+      setIsActive(true);
+      if (idleTimer.current) clearTimeout(idleTimer.current);
+
+      // If user idle for 60s -> inactive
+      idleTimer.current = setTimeout(() => setIsActive(false), 60000);
+    };
+
+    // Start interval to track active time every second
+    intervalRef.current = setInterval(() => {
+      if (isActive) {
+        activeTimeRef.current += 1; // add 1 sec if user is active
+      }
+    }, 1000);
+
+    // Events that reset idle timer
+    window.addEventListener("mousemove", resetIdle);
+    window.addEventListener("keydown", resetIdle);
+
+    // Send data every minute & on exit
+    const updateTime = async () => {
+      const minutes = Math.floor(activeTimeRef.current / 60);
+      if (minutes > 0) {
+        await axios.post("http://localhost:3000/api/users/update-website-time", {
+          userId: user._id,
+          minutesRead: minutes,
+        });
+        console.log("✅ Active time saved:", minutes);
+        activeTimeRef.current = 0; // reset after sending
+      }
+    };
+
+    const intervalSave = setInterval(updateTime, 60000); // send every 1 min
+    window.addEventListener("beforeunload", updateTime);
+
+    return () => {
+      updateTime();
+      clearInterval(intervalRef.current);
+      clearInterval(intervalSave);
+      window.removeEventListener("mousemove", resetIdle);
+      window.removeEventListener("keydown", resetIdle);
+      window.removeEventListener("beforeunload", updateTime);
+    };
+  }, [user]);
+
   return (
     <BrowserRouter>
     <ToastContainer

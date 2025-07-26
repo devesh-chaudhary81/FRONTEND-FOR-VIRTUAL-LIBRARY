@@ -5,6 +5,7 @@ import Navbar from "../components/sidebar";
 import { Search } from "lucide-react";
 import bgImage from '../assets/bg-home.png';
 import { toast } from "react-toastify";
+import TopRatedBooks from "../components/topRated";
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -193,9 +194,14 @@ const Home = () => {
         </section>
 
         {/* Feature Info Boxes */}
+         <div className="mt-16">
+         
+        <TopRatedBooks/>
+      </div>
        
       </div>
-
+     
+    
       <Footer className="mt-48"/>
     </>
   );

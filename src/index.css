@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Make the defaultLayoutPlugin toolbar fixed at the top */
+.rpv-core__toolbar {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 50 !important;
+    background: #ffffff !important; /* keep the background clean */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

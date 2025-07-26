@@ -37,7 +37,7 @@ const SearchResults = () => {
   const handleRating = async (bookId, newRating) => {
     const userId = localStorage.getItem("userId");
     try {
-      await axios.post(`https://api-routes.onrender.com/api/books/${bookId}/rate`, {
+      const res = await axios.post(`https://api-routes.onrender.com/api/books/${bookId}/rate`, {
         bookId,
         userId,
         rating: newRating,
@@ -48,6 +48,13 @@ const SearchResults = () => {
         ...prev,
         [bookId]: newRating,
       }));
+         setResults((prevResults) =>
+            prevResults.map((book) =>
+                book._id === bookId
+                    ? { ...book, averageRating: res.data.averageRating }
+                    : book
+            )
+        );
     } catch (err) {
       console.error("❌ Error saving rating:", err);
     }
@@ -154,9 +161,17 @@ const SearchResults = () => {
                   >
                     <Plus size={16} /> Add to MyShelf
                   </button>
-                  <p className="text-extrabold text-red-600 text-md">
-  ⭐ {book.averageRating ? book.averageRating.toFixed(1) : "No ratings yet"}
+   <p className="flex items-center justify-center gap-2 text-lg font-semibold text-yellow-500 bg-gray-100 px-3 py-1 rounded-full shadow-sm">
+  <span className="text-xl">⭐</span>
+  {book.averageRating ? (
+    <span className="text-gray-800">
+      {book.averageRating.toFixed(1)} <span className="text-sm text-gray-500">/ 5</span>
+    </span>
+  ) : (
+    <span className="text-gray-500 text-sm">No ratings yet</span>
+  )}
 </p>
+
 
                 </div>
               </div>
