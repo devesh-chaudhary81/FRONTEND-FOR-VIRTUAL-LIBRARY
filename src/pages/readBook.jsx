@@ -16,6 +16,7 @@ import "@react-pdf-viewer/default-layout/lib/styles/index.css";
  
 const ReadBook = ({ userId }) => {
   const { id } = useParams();
+  const [topic,settopic]=useState("");
   const [bookURL, setBookURL] = useState(null);
   const [summary, setSummary] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -116,27 +117,18 @@ const [quizData, setQuizData] = useState([]);
   const start = Number(startPage);
   const end = Number(endPage);
 
-  if (
-    isNaN(start) || isNaN(end) ||
-    start < 1 || end < 1 ||
-    start > totalPages || end > totalPages ||
-    end < start || end - start > 20
-  ) {
-    toast.warn("Please enter a valid page range (Max: 20 pages).");
-    return;
-  }
+  
 
   setIsGenerating(true);
   try {
     const route =
       type === "quiz"
-        ? "https://api-routes.onrender.com/api/books/quiz-by-range"
-        : "https://api-routes.onrender.com/api/books/Notes-by-range";
+        ? "https://api-routes.onrender.com/api/books/quiz-by-topic"
+        : "https://api-routes.onrender.com/api/books/Notes-by-topic";
 
     const res = await axios.post(route, {
       pdfUrl: bookURL,
-      startPage: start,
-      endPage: end,
+     topic:topic
     });
 console.log(res);
     if (type === "quiz") {
@@ -182,23 +174,13 @@ console.log(res);
 
   {/* Page Range Inputs */}
   <div className="flex flex-col gap-2 mb-4">
+  Topic
     <input
-      type="number"
-      value={startPage}
-      onChange={(e) => setStartPage(e.target.value)}
+      type="text"
+      value={topic}
+      onChange={(e) => settopic(e.target.value)}
       className="border border-gray-300 p-2 text-black rounded w-full"
-      placeholder="Start Page"
-      min={1}
-      max={totalPages}
-    />
-    <input
-      type="number"
-      value={endPage}
-      onChange={(e) => setEndPage(e.target.value)}
-      className="border border-gray-300 p-2 text-black rounded w-full"
-      placeholder="End Page"
-      min={1}
-      max={totalPages}
+      placeholder="Enter your topic"
     />
   </div>
 
